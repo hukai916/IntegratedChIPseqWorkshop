@@ -35,9 +35,9 @@ A mini-lecture will be given first that will cover basic ideas behind ChIP-seq, 
 | Comparison of popular tools          | 10m  |
 |     * aligner                        |      |
 |     * peak caller                    |      |
-| Downstream analysis                  |      |
-|     * peak annotation                | 5m   |
-|     * motif analysis                 | 5m   |
+| Downstream analysis                  | 10m  |
+|     * peak annotation                |      |
+|     * motif analysis                 |      |
 | Snakemake pipeline                   | 5m   |
 | Hands-on demonstration               | 20m  |
 | Q/A section                          | 5m   |
@@ -57,6 +57,9 @@ A mini-lecture will be given first that will cover basic ideas behind ChIP-seq, 
 * Identify binding motif using sample data
 
 [1] https://bioconductor.org/packages/release/bioc/html/ChIPpeakAnno.html
+
 [2] https://bioconductor.org/packages/release/bioc/html/ATACseqQC.html
+
 [3] https://bioconductor.org/packages/release/bioc/html/trackViewer.html
+
 [4] http://bioconductor.org/packages/release/bioc/html/MotifDb.html

@@ -1,6 +1,6 @@
 # Integrated ChIPseq Analysis Workshop
 
-# Instructor(s) name(s) and contact information
+# Instructors name and contact information
 - Kai Hu: kai.hu@umassmed.edu
 - Rui Li: rui.li@umassmed.edu
 - Haibo Liu: haibol2017@gmail.com

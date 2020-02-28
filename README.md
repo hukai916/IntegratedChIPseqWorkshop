@@ -1,13 +1,14 @@
-# Integrated ChIPseq Analysis Workshop
+# Integrated ChIP-seq Data Analysis Workshop
 
 # Instructors name and contact information
 - Kai Hu: kai.hu@umassmed.edu
 - Rui Li: rui.li@umassmed.edu
 - Haibo Liu: haibol2017@gmail.com
-- Julie Zhu: julie.zhu@umassmed.edu
+- Jianhong Ou: jianhong.ou@duke.com
+- Lihua Julie Zhu: julie.zhu@umassmed.edu
 
 # Workshop Description
-ChIP-seq combines chromatin immunoprecipitation (ChIP) with next-generation sequencing technology to analyze protein interactions with DNA. It has been widely adopted by biologists to identify transcritpion factor binding location and to map specific histone modification or nucleosome position on the genome. A typical workflow of ChIP-seq includes experimental design, sequencing, and downstrean bioinformatics analysis (main challenge). This workshop will focus on the bioinformatics part by comparing popularly practiced tools, their advantages and disadvantages. And an integrated Snakemake pipeline, which wrapped around selected tools, will be leveraged for the demonstration of a sample analysis.
+ChIP-seq combines chromatin immuno-precipitation (ChIP) with next-generation sequencing technology to analyze protein interactions with DNA. It has been widely adopted by biologists to identify transcription factor binding location and to map specific histone modification or nucleosome position on the genome. A typical workflow of ChIP-seq includes experimental design, sequencing, and downstream bioinformatics analysis (main challenge). This workshop will focus on the bioinformatics part by comparing popularly practiced tools, their advantages and disadvantages. And an integrated Snakemake pipeline, which wrapped around selected tools, will be leveraged for the demonstration of a sample analysis.
 
 ## Pre-requisites
 * General understanding of ChIP-seq analysis or have strong interests
@@ -26,6 +27,12 @@ A mini-lecture will be given first that will cover basic ideas behind ChIP-seq, 
 * ATACseqQC [2]
 * trackViewer [3]
 * MotifDb [4]
+* ChIPQC [5]
+* diffbind [6]
+* csaw [7]
+* rGADEM [8]
+* motifStack [9]
+* GeneNetworkBulider [10]
 
 ## Time outline
 | Activity                             | Time |
@@ -63,3 +70,15 @@ A mini-lecture will be given first that will cover basic ideas behind ChIP-seq, 
 [3] https://bioconductor.org/packages/release/bioc/html/trackViewer.html
 
 [4] http://bioconductor.org/packages/release/bioc/html/MotifDb.html
+
+[5] https://bioconductor.org/packages/release/bioc/html/ChIPQC.html
+
+[6] https://bioconductor.org/packages/release/bioc/html/DiffBind.html
+
+[7] https://bioconductor.org/packages/release/bioc/html/csaw.html
+
+[8] https://www.bioconductor.org/packages/release/bioc/html/rGADEM.html
+
+[9] https://bioconductor.org/packages/release/bioc/html/motifStack.html
+
+[10]https://bioconductor.org/packages/release/bioc/html/GeneNetworkBuilder.html

@@ -1,17 +1,16 @@
 Package: integratedchipseqanalysisworkshop
 Title: Integrated ChIP-seq analysis workshop
-Version: 0.1.1
+Version: 0.1.2
 Authors@R:
     c(person(given = "Kai",
            family = "Hu",
            role = c("aut", "cre"),
-           email = "hukai916@gmail.com",
-           comment = c(ORCID = "your-orc-id-here")),
+           email = "hukai916@gmail.com"),
       person(given = "Jianhong",
            family = "Ou",
            role = c("aut"),
            email = "ou.jianhong@gmail.com",
-           comment = c(ORCID = "your-orc-id-here")))
+           comment = c(ORCID = "0000-0002-8652-2488")))
 Description: This package discusses the current best practices for ChIP-seq
     analysis with R packages;
 License: MIT + file LICENSE
@@ -45,7 +44,8 @@ Suggests:
     pander,
     GenomicFeatures,
     org.Mm.eg.db
-URL: https://github.com/hukai916/IntegratedChIPseqWorkshop
+#URL: https://hukai916.github.io/IntegratedChIPseqWorkshop/
+URL: https://github.com/hukai916/IntegratedChIPseqWorkshop/
 BugReports: https://github.com/hukai916/IntegratedChIPseqWorkshop/issues/new/choose
 VignetteBuilder: knitr
 DockerImage: hukai916/integratedchipseqanalysis_workshop:latest

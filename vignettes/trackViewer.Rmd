@@ -3,7 +3,7 @@ title: "trackViewer_workshop2020"
 bibliography: "`r system.file('vignettes', 'bibliography.bib', package = 'integratedchipseqanalysisworkshop')`"
 csl: "`r system.file('vignettes', 'nature.csl', package = 'integratedchipseqanalysisworkshop')`"
 vignette: >
-  %\VignetteIndexEntry{integratedchipseqanalysisworkshop}
+  %\VignetteIndexEntry{integratedchipseqanalysisworkshop_trackViewer}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 output: 

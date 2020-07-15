@@ -1,0 +1,50 @@
+Package: integratedchipseqanalysisworkshop
+Title: Integrated ChIP-seq analysis workshop
+Version: 0.1.1
+Authors@R:
+    c(person(given = "Kai",
+           family = "Hu",
+           role = c("aut", "cre"),
+           email = "hukai916@gmail.com",
+           comment = c(ORCID = "your-orc-id-here")),
+      person(given = "Jianhong",
+           family = "Ou",
+           role = c("aut", "cre"),
+           email = "ou.jianhong@gmail.com",
+           comment = c(ORCID = "your-orc-id-here")))
+Description: This package discusses the current best practices for ChIP-seq
+    analysis with R packages;
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
+Depends:
+    Biobase
+Suggests:
+    Rcpp,
+    reactome.db,
+    EnsDb.Hsapiens.v75,
+    TxDb.Hsapiens.UCSC.hg19.knownGene,
+    BSgenome.Hsapiens.UCSC.hg19,
+    org.Hs.eg.db,
+    trackViewer,
+    ChIPpeakAnno,
+    motifStack,
+    biomaRt,
+    AnnotationHub,
+    UpSetR,
+    seqinr,
+    motifStack,
+    WriteXLS,
+    rtracklayer,
+    knitr,
+    rmarkdown,
+    pkgdown,
+    pander,
+    GenomicFeatures,
+    org.Mm.eg.db
+URL: https://github.com/hukai916/IntegratedChIPseqWorkshop
+BugReports: https://github.com/hukai916/IntegratedChIPseqWorkshop/issues/new/choose
+VignetteBuilder: knitr
+DockerImage: hukai916/integratedchipseqanalysis_workshop:latest

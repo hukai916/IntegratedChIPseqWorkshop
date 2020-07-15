@@ -1,0 +1,16 @@
+url: https://hukai916.github.io/IntegratedChIPseqWorkshop
+
+template:
+  params:
+    bootswatch: flatly
+    ganalytics: UA-93043521-1
+
+home:
+  title: "Integrated ChIPseq Analysis Workshop"
+  type: inverse
+
+
+navbar:
+  right:
+   - icon: fa-github
+     href: https://github.com/hukai916/IntegratedChIPseqWorkshop

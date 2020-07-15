@@ -9,7 +9,7 @@ Authors@R:
            comment = c(ORCID = "your-orc-id-here")),
       person(given = "Jianhong",
            family = "Ou",
-           role = c("aut", "cre"),
+           role = c("aut"),
            email = "ou.jianhong@gmail.com",
            comment = c(ORCID = "your-orc-id-here")))
 Description: This package discusses the current best practices for ChIP-seq

@@ -5,11 +5,11 @@ Authors@R:
     c(person(given = "Kai",
            family = "Hu",
            role = c("aut", "cre"),
-           email = "hukai916@gmail.com"),
+           email = "kai.hu@umassmed.edu"),
       person(given = "Jianhong",
            family = "Ou",
            role = c("aut"),
-           email = "ou.jianhong@gmail.com",
+           email = "jianhong.ou@duke.edu",
            comment = c(ORCID = "0000-0002-8652-2488")))
 Description: This package discusses the current best practices for ChIP-seq
     analysis with R packages;
@@ -44,8 +44,7 @@ Suggests:
     pander,
     GenomicFeatures,
     org.Mm.eg.db
-#URL: https://hukai916.github.io/IntegratedChIPseqWorkshop/
-URL: https://github.com/hukai916/IntegratedChIPseqWorkshop/
+URL: https://hukai916.github.io/IntegratedChIPseqWorkshop/
 BugReports: https://github.com/hukai916/IntegratedChIPseqWorkshop/issues/new/choose
 VignetteBuilder: knitr
 DockerImage: hukai916/integratedchipseqanalysis_workshop:latest

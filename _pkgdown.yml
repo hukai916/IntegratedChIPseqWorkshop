@@ -1,4 +1,4 @@
-url: https://seandavi.github.io/sars2pack
+url: https://hukai916.github.io/IntegratedChIPseqWorkshop
 
 template:
   params:
@@ -6,7 +6,7 @@ template:
     ganalytics: UA-93043521-1
 
 home:
-  title: "IntegratedChIPseqWorkshop"
+  title: "Integrated ChIPseq Analysis Workshop"
   type: inverse
 
 

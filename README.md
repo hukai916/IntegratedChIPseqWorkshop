@@ -2,7 +2,7 @@
 
 # Instructors name and contact information
 - Kai Hu: kai.hu@umassmed.edu
-- Jianhong Ou: jianhong.ou@duke.com
+- Jianhong Ou: jianhong.ou@duke.edu
 - Rui Li: rui.li@umassmed.edu
 - Haibo Liu: haibol2017@gmail.com
 - Lihua Julie Zhu: julie.zhu@umassmed.edu

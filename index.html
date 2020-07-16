@@ -12,8 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Integrated ChIPseq Analysis Workshop">
-<meta property="og:description" content="This package discusses the current best practices for ChIP-seq
-    analysis with R packages;">
+<meta property="og:description" content="This package discusses the current best practices for ChIP-seq analysis with R packages.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -61,7 +60,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/IntegratedChIPseqAnalysisWorkshop.html">Integrated ChIP-seq Analysis Workshop</a>
+      <a href="articles/IntegratedChIPseqAnalysisWorkshop.html">Integrated ChIP-seq Data Analysis Workshop</a>
     </li>
   </ul>
 </li>
@@ -108,17 +107,17 @@
 </div>
 <div id="workshop-description" class="section level1">
 <h1 class="hasAnchor">
-<a href="#workshop-description" class="anchor"></a>Workshop Description</h1>
-<p>ChIP-seq combines chromatin immuno-precipitation (ChIP) with next-generation sequencing technology to analyze protein interactions with DNA. It has been widely adopted by biologists to identify transcription factor binding location and to map specific histone modification or nucleosome position on the genome. A typical workflow of ChIP-seq includes experimental design, sequencing, and downstream bioinformatics analysis (main challenge). This workshop will focus on the bioinformatics part by comparing popularly practiced tools, their advantages and disadvantages. And an integrated Snakemake pipeline, which wrapped around selected tools, will be leveraged for the demonstration of a sample analysis.</p>
+<a href="#workshop-description" class="anchor"></a>Workshop description</h1>
+<p>ChIP-seq combines chromatin immuno-precipitation (ChIP) with next-generation sequencing technology to analyze protein interactions with DNA. It has been widely adopted by biologists to identify transcription factor binding location and to map specific histone modification or nucleosome position on the genome. A typical workflow of ChIP-seq includes experimental design, sequencing, and downstream bioinformatics analysis. This workshop focuses on the bioinformatics part by comparing popularly practiced tools, their advantages and limitations. Specifically, we will demonstrate how to perform downstream analysis (after peak calling) with package ChIPpeakAnno and trackViewer.</p>
 <div id="pre-requisites" class="section level2">
 <h2 class="hasAnchor">
 <a href="#pre-requisites" class="anchor"></a>Pre-requisites</h2>
 <ul>
 <li>General understanding of ChIP-seq analysis or have strong interests</li>
-<li>Basic knowledge of Python, Snakemake, R, Anaconda</li>
+<li>Basic knowledge of R or Python</li>
 <li>Familiar or have interests in the following concepts:
 <ul>
-<li>Read mapper</li>
+<li>Short read mapping</li>
 <li>Peak calling/annotation</li>
 <li>Motif analysis</li>
 </ul>
@@ -128,8 +127,25 @@
 </div>
 <div id="workshop-participation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#workshop-participation" class="anchor"></a>Workshop Participation</h2>
-<p>A mini-lecture will be given first that will cover basic ideas behind ChIP-seq, comparision of commonly used tools, and concept of Snakemake pipeline. Then, a hands-on demo will be performed. Last will be a Q/A section.</p>
+<a href="#workshop-participation" class="anchor"></a>Workshop participation</h2>
+<p>A mini-lecture will be given at the beginning that will cover basic ideas behind ChIP-seq, comparision of commonly used tools for ChIP-seq data analysis. Then, a hands-on demo will be performed to demonstrate the downstream analysis with ChIPpeakAnno and trackViewer packages. Last will be a Q/A section.</p>
+</div>
+<div id="how-to-run-docker" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-to-run-docker" class="anchor"></a>How to run Docker</h2>
+<ul>
+<li>Install Docker (<a href="https://www.docker.com/" class="uri">https://www.docker.com/</a>)</li>
+<li>Pull the Docker image from Docker hub: <code>docker pull hukai916/integratedchipseqanalysis_workshop</code>
+</li>
+<li>Run the image: <code>docker run -e PASSWORD=yourpassword -p 8787:8787 hukai916/integratedchipseqanalysis_workshop</code>
+</li>
+<li>Log in to RStudio at <a href="http://localhost:8787">http://localhost:8787</a> using username <code>rstudio</code> and password <code>yourpassword</code>. For Windows users, you also need to provide your IP address, you can find it using <code>docker-machine ip default</code>.</li>
+<li>Inside the RStudio, run: <code><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes(package = "hukai916/integratedchipseqanalysis_workshop")</a></code>
+</li>
+<li>You can click one of the links: “HTML”, “source”, “R code”</li>
+<li>In case of <code>The requested page was not found</code> error, try add ‘help/’ in front of the hostname in the URL (this is a known bug): <a href="http://localhost:8787/help/library/integratedchipseqanalysisworkshop/doc/IntegratedChIPseqAnalysisWorkshop.html" class="uri">http://localhost:8787/help/library/integratedchipseqanalysisworkshop/doc/IntegratedChIPseqAnalysisWorkshop.html</a>
+</li>
+</ul>
 </div>
 <div id="r--bioconductor-packages-used" class="section level2">
 <h2 class="hasAnchor">
@@ -158,18 +174,18 @@
 <tbody>
 <tr class="odd">
 <td>Overview of ChIP-seq</td>
-<td>5m</td>
+<td>3m</td>
 </tr>
 <tr class="even">
 <td>Pipeline for ChIP-seq analysis</td>
-<td>5m</td>
+<td>2m</td>
 </tr>
 <tr class="odd">
 <td>Comparison of popular tools</td>
-<td>10m</td>
+<td>5m</td>
 </tr>
 <tr class="even">
-<td>* aligner</td>
+<td>* short read aligner</td>
 <td></td>
 </tr>
 <tr class="odd">
@@ -189,14 +205,18 @@
 <td></td>
 </tr>
 <tr class="odd">
-<td>Snakemake pipeline</td>
-<td>5m</td>
+<td>* metagene visualization</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>Hands-on demonstration</td>
-<td>20m</td>
+<td>* etc.</td>
+<td></td>
 </tr>
 <tr class="odd">
+<td>Hands-on demonstration</td>
+<td>25m</td>
+</tr>
+<tr class="even">
 <td>Q/A section</td>
 <td>5m</td>
 </tr>
@@ -220,13 +240,28 @@
 <h2 class="hasAnchor">
 <a href="#learning-objectives" class="anchor"></a>Learning objectives</h2>
 <ul>
-<li>Repeat Snakemake analysis for sample ChIP-seq data (optional)</li>
-<li>Explore peak annotation with ChIPpeakAnno</li>
-<li>Perform differential peak calling analysis</li>
+<li>Get familiar with the package ChIPpeakAnno and trackViewer</li>
+<li>Explore peak annotation</li>
 <li>Perform GO enrichment analysis</li>
-<li>Identify binding motif using sample data</li>
-<li>Get familiar with trackViewer</li>
+<li>Perform metagene visualization</li>
+<li>Identify binding motif</li>
 </ul>
+</div>
+<div id="useful-links" class="section level2">
+<h2 class="hasAnchor">
+<a href="#useful-links" class="anchor"></a>Useful links</h2>
+<ul>
+<li>pkgdown website that contains all workshop materials: <a href="https://hukai916.github.io/IntegratedChIPseqWorkshop" class="uri">https://hukai916.github.io/IntegratedChIPseqWorkshop</a>
+</li>
+<li>docker image that contains all dependencies required for the workshop: <a href="https://hub.docker.com/repository/docker/hukai916/integratedchipseqanalysis_workshop" class="uri">https://hub.docker.com/repository/docker/hukai916/integratedchipseqanalysis_workshop</a>
+</li>
+<li>GitHub Action build status badge: <img src="https://github.com/hukai916/IntegratedChIPseqWorkshop/workflows/.github/workflows/basic_checks.yaml/badge.svg" alt=".github/workflows/basic_checks.yaml">
+</li>
+</ul>
+</div>
+<div id="references" class="section level2">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
 <p>[1] <a href="https://bioconductor.org/packages/release/bioc/html/ChIPpeakAnno.html" class="uri">https://bioconductor.org/packages/release/bioc/html/ChIPpeakAnno.html</a></p>
 <p>[2] <a href="https://bioconductor.org/packages/release/bioc/html/ATACseqQC.html" class="uri">https://bioconductor.org/packages/release/bioc/html/ATACseqQC.html</a></p>
 <p>[3] <a href="https://bioconductor.org/packages/release/bioc/html/trackViewer.html" class="uri">https://bioconductor.org/packages/release/bioc/html/trackViewer.html</a></p>

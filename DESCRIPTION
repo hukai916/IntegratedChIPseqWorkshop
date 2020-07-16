@@ -11,8 +11,7 @@ Authors@R:
            role = c("aut"),
            email = "jianhong.ou@duke.edu",
            comment = c(ORCID = "0000-0002-8652-2488")))
-Description: This package discusses the current best practices for ChIP-seq
-    analysis with R packages;
+Description: This package discusses the current best practices for ChIP-seq analysis with R packages.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

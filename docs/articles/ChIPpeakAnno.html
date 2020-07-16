@@ -1016,6 +1016,330 @@ Figure 19. Distribution of aligned features
 </p>
 </div>
 </div>
+<div id="below-is-for-trackviewer" class="section level1">
+<h1 class="hasAnchor">
+<a href="#below-is-for-trackviewer" class="anchor"></a>Below is for trackViewer:</h1>
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p>It is a routine way to show the distribution of mutation for genetic variations by lollipop-style (or needle-style) plot in a genome browser, along with a variety of genomic annotations, such as gene level or exon level models, CpG island, and so on. To show the SNP status or methylation data, a special plot, called lollipop plot or needle plot, is used to show the distribution along annotations. Many of currently available tools offline or online provide lollipop-like plot to show the mutation data such as cBioPortal Tools::MutationMapper<span class="citation">[@gao2013integrative]</span>, EMBL-EBI::Pfam<span class="citation">[@finn2006pfam]</span>, and BioJS::muts-needle-plot<span class="citation">[@michael_p_schroeder_2015_14561]</span>, BiQ Analyzer<span class="citation">[@bock2005biq]</span>, and Methylation plotter<span class="citation">[@mallona2014methylation]</span>. The cBioPortal Tools::MutationMapper is a well-known and easy to use on-line genome browser that can output high quality of figures with mutations by input tab-delimited mutation data. In R/Bioconductor, there are options to use the flexibility of the Rgraphics system to display Methylation data such as <em>MethVisual</em><span class="citation">[@zackay2010methvisual]</span>, <em>REDseq</em><span class="citation">[@zhu4redseq]</span>, and <em>GenVisR</em><span class="citation">[@skidmore2016genvisr]</span>.</p>
+<p><strong>Table 1: Tools availble for lollipop plot. </strong></p>
+<table class="table">
+<colgroup>
+<col width="44%">
+<col width="19%">
+<col width="7%">
+<col width="28%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">software</th>
+<th align="left">inputs</th>
+<th align="left">online</th>
+<th align="left">description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">MutationMapper<span class="citation">[@gao2013integrative]</span>
+</td>
+<td align="left">tab-delimited text</td>
+<td align="left">Yes</td>
+<td align="left">interprets mutations with different heights along protein annotations in automatic color theme</td>
+</tr>
+<tr class="even">
+<td align="left">Pfam<span class="citation">[@finn2006pfam]</span>
+</td>
+<td align="left">JSON</td>
+<td align="left">Yes</td>
+<td align="left">could combine different line and head colors with different drawing styles</td>
+</tr>
+<tr class="odd">
+<td align="left">muts-needle-plot<span class="citation">[@michael_p_schroeder_2015_14561]</span>
+</td>
+<td align="left">JSON</td>
+<td align="left">No</td>
+<td align="left">plots data point with different colors, heights, and size along annotations, and highlighted selcted coordinates</td>
+</tr>
+<tr class="even">
+<td align="left">BiQ Analyzer<span class="citation">[@bock2005biq]</span>
+</td>
+<td align="left">BiQ methylation file</td>
+<td align="left">Yes</td>
+<td align="left">interprets methylation status in black &amp; white</td>
+</tr>
+<tr class="odd">
+<td align="left">Methylation plotter<span class="citation">[@mallona2014methylation]</span>
+</td>
+<td align="left">tab-delimited text</td>
+<td align="left">Yes</td>
+<td align="left">stacked multiple methylation status for multiple samples</td>
+</tr>
+<tr class="even">
+<td align="left">
+<em>MethVisual</em><span class="citation">[@zackay2010methvisual]</span>
+</td>
+<td align="left">R list</td>
+<td align="left">No</td>
+<td align="left">visualize the methylation status of CpGs according to their genomic position</td>
+</tr>
+<tr class="odd">
+<td align="left">
+<em>REDseq</em><span class="citation">[@zhu4redseq]</span>
+</td>
+<td align="left">R list</td>
+<td align="left">No</td>
+<td align="left">plot frequencies of methylations and SNPs along a chromosome</td>
+</tr>
+<tr class="even">
+<td align="left">
+<em>GenVisR</em><span class="citation">[@skidmore2016genvisr]</span>
+</td>
+<td align="left">R dataframe</td>
+<td align="left">No</td>
+<td align="left">plot most accurate graphic representation of the ensembl annotation version based on biomart service</td>
+</tr>
+</tbody>
+</table>
+<p>All the tools available for the genomic data visualization mentioned above can meet the basic even complicated requirement. However, if there are multiple mutations in almost same position, it is very difficult to display the data using any available tools. What’s more there is a tendency that the figures it generated become more and more complex and busy. Thereby make it difficult in generating high quality pictures for publication in bunch. To fill this gap, we developed <em>trackViewer</em>, a R/Bioconductor package as an enhanced light-weight genome viewer for visualizing various types of high-throughput sequencing data, side by side or stacked with multiple annotation tracks. Besides the regular read coverage tracks supported by existing genome browsers/viewers, <em>trackViewer</em> can also be used to generate lollipop plot to depict the methylation and SNP/mutation status, together with coverage data and annotation tracks to facilitate integrated analysis of multi-omics data. In addition, figures generated by <em>trackViewer</em> are interactive, i.e., the feel-and-look such as the layout, the color scheme and the order of tracks can be easily customized by the users. Furthermore, <em>trackViewer</em> can be easily integrated into standard analysis pipeline for various high-throughput sequencing dataset such as ChIP-seq, RNA-seq, methylation-seq or DNA-seq. The images produced by <em>trackViewer</em> are highly customizable including labels, symbols, colors and size. Here, we illustrate its utilities and capabilities in deriving biological insights from multi-omics dataset from GEO/Encode.</p>
+</div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p><em>BiocManager</em> is used to install the released version of <em>trackViewer</em>.</p>
+<div class="sourceCode" id="cb91"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">BiocManager</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"trackViewer"</span>)</pre></body></html></div>
+<p>To install the development version of <em>trackViewer</em>, please try</p>
+<div class="sourceCode" id="cb92"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">BiocManager</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"jianhong/trackViewer"</span>)</pre></body></html></div>
+<p>To check the current version of <em>trackViewer</em>, please try</p>
+<div class="sourceCode" id="cb93"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span>(<span class="st">"trackViewer"</span>)</pre></body></html></div>
+<pre><code>## [1] '1.24.1'</code></pre>
+</div>
+<div id="quick-start-for-lollipop-plot" class="section level2">
+<h2 class="hasAnchor">
+<a href="#quick-start-for-lollipop-plot" class="anchor"></a>Quick start for lollipop plot</h2>
+<div id="step-1--prepare-the-methylationvariantmutation-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-1--prepare-the-methylationvariantmutation-data" class="anchor"></a>Step 1. Prepare the methylation/variant/mutation data</h3>
+<p>The input data for lollipop plot by <em>trackViewer</em> is an object of <em>GenomicRanges</em>::<code>GRanges</code>.</p>
+<div class="sourceCode" id="cb95"><html><body><pre class="r"><span class="co">## load library</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">trackViewer</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123</span>) <span class="co">## set seed for random sampling to make sure it can be repeat.</span>
+<span class="co">## Here we use SNP sample data</span>
+<span class="no">SNP</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>, <span class="fl">100</span>, <span class="fl">105</span>, <span class="fl">108</span>, <span class="fl">400</span>, <span class="fl">410</span>, <span class="fl">420</span>, <span class="fl">600</span>, <span class="fl">700</span>, <span class="fl">805</span>, <span class="fl">840</span>, <span class="fl">1400</span>, <span class="fl">1402</span>)
+<span class="co">## use GenomicRanges::GRanges function to create a GRanges object.</span>
+<span class="co">## for real data, users can import vcf data via VariantAnnotation::readVcf function.</span>
+<span class="no">sample.gr</span> <span class="kw">&lt;-</span> <span class="fu">GRanges</span>(<span class="st">"chr1"</span>, <span class="fu">IRanges</span>(<span class="no">SNP</span>, <span class="kw">width</span><span class="kw">=</span><span class="fl">1</span>,
+                                     <span class="co">## the name of GRanges object will be used as label</span>
+                                     <span class="kw">names</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"snp"</span>, <span class="no">SNP</span>)),
+                     <span class="co">## score value will be used to for the height of lollipop</span>
+                     <span class="kw">score</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span>(<span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">SNP</span>), <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
+                     <span class="co">## set the color for lollipop node.</span>
+                     <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span>(<span class="fl">6</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">SNP</span>), <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
+                     <span class="co">## set the lollipop stem color</span>
+                     <span class="kw">border</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"black"</span>, <span class="st">"gray80"</span>, <span class="st">"gray30"</span>),
+                                     <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">SNP</span>), <span class="kw">replace</span><span class="kw">=</span><span class="fl">TRUE</span>)
+                     )</pre></body></html></div>
+</div>
+<div id="step-2--prepare-the-geneprotein-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-2--prepare-the-geneprotein-model" class="anchor"></a>Step 2. Prepare the gene/protein model</h3>
+<p>The gene/protein model for lollipop plot by <em>trackViewer</em> is also an object of <em>GenomicRanges</em>::<code>GRanges</code>.</p>
+<div class="sourceCode" id="cb96"><html><body><pre class="r"><span class="no">features.gr</span> <span class="kw">&lt;-</span> <span class="fu">GRanges</span>(<span class="st">"chr1"</span>, <span class="fu">IRanges</span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">501</span>, <span class="fl">1001</span>),
+                                       <span class="kw">width</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">120</span>, <span class="fl">400</span>, <span class="fl">405</span>),
+                                       <span class="kw">names</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"exon"</span>, <span class="fl">1</span>:<span class="fl">3</span>)),
+                       <span class="kw">fill</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#FF8833"</span>, <span class="st">"#51C6E6"</span>, <span class="st">"#DFA32D"</span>), <span class="co">## color for exon</span>
+                       <span class="kw">height</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.02</span>, <span class="fl">0.05</span>, <span class="fl">0.08</span>) <span class="co">## height for exon</span>
+                    )</pre></body></html></div>
+</div>
+<div id="step-3--plot-lollipop-plot" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-3--plot-lollipop-plot" class="anchor"></a>Step 3. Plot lollipop plot</h3>
+<p>The clustered events could be visualized one by one by jittered lollipop positions.</p>
+<div class="sourceCode" id="cb97"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/trackViewer/man/lolliplot.html">lolliplot</a></span>(<span class="no">sample.gr</span>, <span class="no">features.gr</span>)</pre></body></html></div>
+<p><img src="ChIPpeakAnno_files/figure-html/quickStartStep3-1.png" width="576"></p>
+</div>
+</div>
+<div id="plot-data-from-variant-call-format-vcf-file" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plot-data-from-variant-call-format-vcf-file" class="anchor"></a>Plot data from Variant Call Format (VCF) file</h2>
+<p>VCF is a text file format that contains metadata and mutation information about genomic positions, original genotypes and optional genotypes. The <em>trackViewer</em> package could show single nucleotide polymorphisms (SNPs) from VCF file in lollipop-style plot. Figure @ref(fig:plotVCFdata) shows an example lollipop plot of real SNPs. Sample SNPs are a subset of 1000 variants and 50 samples from chromosome 22 taken from 1000 Genomes in VCF in the <em>VariantAnnotation</em> package. Different colors depict the new SNP events in the circles. The number of circles indicates the number of SNP events.</p>
+<div class="sourceCode" id="cb98"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">VariantAnnotation</span>) <span class="co">## load package for reading vcf file</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>) <span class="co">## load package for gene model</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">org.Hs.eg.db</span>) <span class="co">## load package for gene name</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rtracklayer</span>)
+<span class="no">fl</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"chr22.vcf.gz"</span>, <span class="kw">package</span><span class="kw">=</span><span class="st">"VariantAnnotation"</span>)
+<span class="co">## set the track range</span>
+<span class="no">gr</span> <span class="kw">&lt;-</span> <span class="fu">GRanges</span>(<span class="st">"22"</span>, <span class="fu">IRanges</span>(<span class="fl">50968014</span>, <span class="fl">50970514</span>, <span class="kw">names</span><span class="kw">=</span><span class="st">"TYMP"</span>))
+<span class="co">## read in vcf file</span>
+<span class="no">tab</span> <span class="kw">&lt;-</span> <span class="fu">TabixFile</span>(<span class="no">fl</span>)
+<span class="no">vcf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/VariantAnnotation/man/readVcf-methods.html">readVcf</a></span>(<span class="no">fl</span>, <span class="st">"hg19"</span>, <span class="kw">param</span><span class="kw">=</span><span class="no">gr</span>)
+<span class="co">## get GRanges from VCF object </span>
+<span class="no">mutation.frequency</span> <span class="kw">&lt;-</span> <span class="fu">rowRanges</span>(<span class="no">vcf</span>)
+<span class="co">## keep the metadata</span>
+<span class="fu">mcols</span>(<span class="no">mutation.frequency</span>) <span class="kw">&lt;-</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="fu">mcols</span>(<span class="no">mutation.frequency</span>),
+          <span class="kw pkg">VariantAnnotation</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/VariantAnnotation/man/VCF-class.html">info</a></span>(<span class="no">vcf</span>))
+<span class="co">## set colors</span>
+<span class="no">mutation.frequency</span>$<span class="no">border</span> <span class="kw">&lt;-</span> <span class="st">"gray30"</span>
+<span class="no">mutation.frequency</span>$<span class="no">color</span> <span class="kw">&lt;-</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">"^rs"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">mutation.frequency</span>)),
+           <span class="st">"lightcyan"</span>, <span class="st">"lavender"</span>)
+<span class="co">## plot Global Allele Frequency based on AC/AN</span>
+<span class="no">mutation.frequency</span>$<span class="no">score</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">mutation.frequency</span>$<span class="no">AF</span>*<span class="fl">100</span>)
+<span class="co">## change the SNPs label rotation angle</span>
+<span class="no">mutation.frequency</span>$<span class="no">label.parameter.rot</span> <span class="kw">&lt;-</span> <span class="fl">45</span>
+<span class="co">## keep sequence level style same</span>
+<span class="fu">seqlevelsStyle</span>(<span class="no">gr</span>) <span class="kw">&lt;-</span> <span class="fu">seqlevelsStyle</span>(<span class="no">mutation.frequency</span>) <span class="kw">&lt;-</span> <span class="st">"UCSC"</span>
+<span class="fu">seqlevels</span>(<span class="no">mutation.frequency</span>) <span class="kw">&lt;-</span> <span class="st">"chr22"</span>
+<span class="co">## extract transcripts in the range</span>
+<span class="no">trs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/trackViewer/man/geneModelFromTxdb.html">geneModelFromTxdb</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>,
+                         <span class="no">org.Hs.eg.db</span>, <span class="kw">gr</span><span class="kw">=</span><span class="no">gr</span>)
+<span class="co">## subset the features to show the interested transcripts only</span>
+<span class="no">features</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span>(<span class="no">trs</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">dat</span>), <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span>(<span class="no">trs</span><span class="kw">[[</span><span class="fl">5</span>]]$<span class="no">dat</span>))
+<span class="co">## define the feature labels</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">features</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">trs</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">name</span>, <span class="no">trs</span><span class="kw">[[</span><span class="fl">5</span>]]$<span class="no">name</span>)
+<span class="co">## define the feature colors</span>
+<span class="no">features</span>$<span class="no">fill</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lightblue"</span>, <span class="st">"mistyrose"</span>)
+<span class="co">## define the feature heights</span>
+<span class="no">features</span>$<span class="no">height</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">.02</span>, <span class="fl">.04</span>)
+<span class="co">## set the legends</span>
+<span class="no">legends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">labels</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"known"</span>, <span class="st">"unkown"</span>),
+                <span class="kw">fill</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lightcyan"</span>, <span class="st">"lavender"</span>),
+                <span class="kw">color</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"gray80"</span>, <span class="st">"gray80"</span>))
+<span class="co">## lollipop plot</span>
+<span class="fu"><a href="https://rdrr.io/pkg/trackViewer/man/lolliplot.html">lolliplot</a></span>(<span class="no">mutation.frequency</span>,
+          <span class="no">features</span>, <span class="kw">ranges</span><span class="kw">=</span><span class="no">gr</span>, <span class="kw">type</span><span class="kw">=</span><span class="st">"circle"</span>,
+          <span class="kw">legend</span><span class="kw">=</span><span class="no">legends</span>)</pre></body></html></div>
+<div class="figure">
+<img src="ChIPpeakAnno_files/figure-html/plotVCFdata-1.png" alt="lollipop plot for VCF data" width="864"><p class="caption">
+lollipop plot for VCF data
+</p>
+</div>
+</div>
+<div id="plot-methylation-data-from-bed-format-file" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plot-methylation-data-from-bed-format-file" class="anchor"></a>Plot methylation data from bed format file</h2>
+<p>Any data can imported into a <code>GRanges</code> object can be viewed by <em>trackViewer</em> package. Sample methylations are random data generated for illustration and saved in bed format file. The <em>rtracklayer</em> package is used to import the methylation data into a <code>GRanges</code>. The transcripts are extracted from <code>TxDb</code> object and assigned gene symbol with <code>org</code> database. Here also show multiple transcripts could be shown in different colors and tracks.</p>
+<div class="sourceCode" id="cb99"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>) <span class="co">## load package for gene model</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">org.Hs.eg.db</span>) <span class="co">## load package for gene name</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rtracklayer</span>)
+<span class="co">## set the track range</span>
+<span class="no">gr</span> <span class="kw">&lt;-</span> <span class="fu">GRanges</span>(<span class="st">"chr22"</span>, <span class="fu">IRanges</span>(<span class="fl">50968014</span>, <span class="fl">50970514</span>, <span class="kw">names</span><span class="kw">=</span><span class="st">"TYMP"</span>))
+<span class="co">## extract transcripts in the range</span>
+<span class="no">trs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/trackViewer/man/geneModelFromTxdb.html">geneModelFromTxdb</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>,
+                         <span class="no">org.Hs.eg.db</span>, <span class="kw">gr</span><span class="kw">=</span><span class="no">gr</span>)
+<span class="co">## subset the features to show the interested transcripts only</span>
+<span class="no">features</span> <span class="kw">&lt;-</span> <span class="fu">GRangesList</span>(<span class="no">trs</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">dat</span>, <span class="no">trs</span><span class="kw">[[</span><span class="fl">5</span>]]$<span class="no">dat</span>, <span class="no">trs</span><span class="kw">[[</span><span class="fl">6</span>]]$<span class="no">dat</span>)
+<span class="no">flen</span> <span class="kw">&lt;-</span> <span class="fu">elementNROWS</span>(<span class="no">features</span>)
+<span class="no">features</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(<span class="no">features</span>)
+<span class="co">## define the feature track layers</span>
+<span class="no">features</span>$<span class="no">featureLayerID</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">1</span>:<span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">flen</span>[-<span class="fl">3</span>]), <span class="no">flen</span>[<span class="fl">3</span>]))
+<span class="co">## define the feature labels</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">features</span>) <span class="kw">&lt;-</span> <span class="no">features</span>$<span class="no">symbol</span>
+<span class="co">## define the feature colors</span>
+<span class="no">features</span>$<span class="no">fill</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lightblue"</span>, <span class="st">"mistyrose"</span>, <span class="st">"mistyrose"</span>), <span class="no">flen</span>)
+<span class="co">## define the feature heights</span>
+<span class="no">features</span>$<span class="no">height</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">features</span>$<span class="no">feature</span><span class="kw">==</span><span class="st">"CDS"</span>, <span class="fl">.04</span>, <span class="fl">.02</span>)
+<span class="co">## import methylation data from a bed file</span>
+<span class="no">methy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rtracklayer/man/export.html">import</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"methy.bed"</span>, <span class="kw">package</span><span class="kw">=</span><span class="st">"trackViewer"</span>), <span class="st">"BED"</span>)
+<span class="co">## subset the data to simplify information</span>
+<span class="no">methy</span> <span class="kw">&lt;-</span> <span class="no">methy</span>[<span class="no">methy</span>$<span class="no">score</span> <span class="kw">&gt;</span> <span class="fl">20</span>]
+<span class="co">## for pie plot, there are must be at least two numeric columns</span>
+<span class="no">methy</span>$<span class="no">score2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="no">methy</span>$<span class="no">score</span>) - <span class="no">methy</span>$<span class="no">score</span>
+<span class="co">## set the legends</span>
+<span class="no">legends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">labels</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"methylated"</span>, <span class="st">"unmethylated"</span>),
+                <span class="kw">fill</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"white"</span>, <span class="st">"lightblue"</span>),
+                <span class="kw">color</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"black"</span>, <span class="st">"black"</span>))
+<span class="co">## lollipop plot, pie layout</span>
+<span class="fu"><a href="https://rdrr.io/pkg/trackViewer/man/lolliplot.html">lolliplot</a></span>(<span class="no">methy</span>, <span class="no">features</span>,
+          <span class="kw">ranges</span><span class="kw">=</span><span class="no">gr</span>, <span class="kw">type</span><span class="kw">=</span><span class="st">"pie"</span>,
+          <span class="kw">legend</span><span class="kw">=</span><span class="no">legends</span>)</pre></body></html></div>
+<div class="figure">
+<img src="ChIPpeakAnno_files/figure-html/plotMethyBed-1.png" alt="lollipop plot, pie layout" width="864"><p class="caption">
+lollipop plot, pie layout
+</p>
+</div>
+</div>
+<div id="plot-lollipop-plot-for-multiple-patients-in-pie-stack-layout" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plot-lollipop-plot-for-multiple-patients-in-pie-stack-layout" class="anchor"></a>Plot lollipop plot for multiple patients in “pie.stack” layout</h2>
+<p>The percentage of methylation rates are shown by pie graph in different layers for different patients.</p>
+<div class="sourceCode" id="cb100"><html><body><pre class="r"><span class="co">## simulate multiple patients</span>
+<span class="no">rand.id</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">methy</span>), <span class="fl">3</span>*<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">methy</span>), <span class="kw">replace</span><span class="kw">=</span><span class="fl">TRUE</span>)
+<span class="no">rand.id</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(<span class="no">rand.id</span>)
+<span class="no">methy.mul.patient</span> <span class="kw">&lt;-</span> <span class="no">methy</span>[<span class="no">rand.id</span>]
+<span class="co">## pie.stack require metadata "stack.factor", and the metadata can not be </span>
+<span class="co">## stack.factor.order or stack.factor.first</span>
+<span class="no">len.max</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">rand.id</span>))
+<span class="no">stack.factors</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"patient"</span>,
+                        <span class="fu"><a href="https://rdrr.io/r/base/formatc.html">formatC</a></span>(<span class="fl">1</span>:<span class="no">len.max</span>,
+                                <span class="kw">width</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">len.max</span>)),
+                                <span class="kw">flag</span><span class="kw">=</span><span class="st">"0"</span>))
+<span class="no">methy.mul.patient</span>$<span class="no">stack.factor</span> <span class="kw">&lt;-</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">rand.id</span>), <span class="no">sample</span>, <span class="kw">x</span><span class="kw">=</span><span class="no">stack.factors</span>))
+<span class="no">methy.mul.patient</span>$<span class="no">score</span> <span class="kw">&lt;-</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span>(<span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">methy.mul.patient</span>), <span class="kw">replace</span><span class="kw">=</span><span class="fl">TRUE</span>)
+<span class="co">## for a pie plot, two or more numeric meta-columns are required.</span>
+<span class="no">methy.mul.patient</span>$<span class="no">score2</span> <span class="kw">&lt;-</span> <span class="fl">100</span> - <span class="no">methy.mul.patient</span>$<span class="no">score</span>
+<span class="co">## set different color set for different patient</span>
+<span class="no">patient.color.set</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">stack.factors</span>)),
+                                                 <span class="st">"#FFFFFFFF"</span>),
+                                           <span class="kw">stringsAsFactors</span><span class="kw">=</span><span class="fl">FALSE</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">patient.color.set</span>) <span class="kw">&lt;-</span> <span class="no">stack.factors</span>
+<span class="no">methy.mul.patient</span>$<span class="no">color</span> <span class="kw">&lt;-</span>
+    <span class="no">patient.color.set</span>[<span class="no">methy.mul.patient</span>$<span class="no">stack.factor</span>]
+<span class="co">## set the legends</span>
+<span class="no">legends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">labels</span><span class="kw">=</span><span class="no">stack.factors</span>, <span class="kw">col</span><span class="kw">=</span><span class="st">"gray80"</span>,
+                <span class="kw">fill</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="no">patient.color.set</span>, <span class="no">`[`</span>, <span class="fl">1</span>))
+<span class="co">## lollipop plot</span>
+<span class="fu"><a href="https://rdrr.io/pkg/trackViewer/man/lolliplot.html">lolliplot</a></span>(<span class="no">methy.mul.patient</span>,
+          <span class="no">features</span>, <span class="kw">ranges</span><span class="kw">=</span><span class="no">gr</span>,
+          <span class="kw">type</span><span class="kw">=</span><span class="st">"pie.stack"</span>,
+          <span class="kw">legend</span><span class="kw">=</span><span class="no">legends</span>)</pre></body></html></div>
+<div class="figure">
+<img src="ChIPpeakAnno_files/figure-html/plotMethypieStack-1.png" alt="lollipop plot, pie.stack layout" width="864"><p class="caption">
+lollipop plot, pie.stack layout
+</p>
+</div>
+</div>
+<div id="plot-lollipop-plot-in-caterpillar-layout-to-compare-two-samples" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plot-lollipop-plot-in-caterpillar-layout-to-compare-two-samples" class="anchor"></a>Plot lollipop plot in caterpillar layout to compare two samples</h2>
+<p>The caterpillar layout can be used to side by side comparing two samples or to display dense data.</p>
+<div class="sourceCode" id="cb101"><html><body><pre class="r"><span class="co">## use SNPsideID to set the layer of event</span>
+<span class="no">sample.gr</span>$<span class="no">SNPsideID</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"top"</span>, <span class="st">"bottom"</span>),
+                               <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">sample.gr</span>),
+                               <span class="kw">replace</span><span class="kw">=</span><span class="fl">TRUE</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/trackViewer/man/lolliplot.html">lolliplot</a></span>(<span class="no">sample.gr</span>, <span class="no">features.gr</span>)</pre></body></html></div>
+<div class="figure">
+<img src="ChIPpeakAnno_files/figure-html/plotCaterpillar-1.png" alt="lollipop plot, caterpillar layout" width="864"><p class="caption">
+lollipop plot, caterpillar layout
+</p>
+</div>
+</div>
+<div id="dandelion-plot-hundreds-snps" class="section level2">
+<h2 class="hasAnchor">
+<a href="#dandelion-plot-hundreds-snps" class="anchor"></a>Dandelion plot hundreds SNPs</h2>
+<p>Sometimes, there are as many as hundreds of SNPs or methylation status involved in one gene. Dandelion plot can be used to depict such dense SNPs or methylation. Please note that the height of the dandelion indicates the density of the events.</p>
+<div class="sourceCode" id="cb102"><html><body><pre class="r"><span class="no">methy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rtracklayer/man/export.html">import</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"methy.bed"</span>, <span class="kw">package</span><span class="kw">=</span><span class="st">"trackViewer"</span>), <span class="st">"BED"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">methy</span>)</pre></body></html></div>
+<pre><code>## [1] 38</code></pre>
+<div class="sourceCode" id="cb104"><html><body><pre class="r"><span class="co">## set the color of dandelion leaves.</span>
+<span class="no">methy</span>$<span class="no">color</span> <span class="kw">&lt;-</span> <span class="fl">3</span>
+<span class="no">methy</span>$<span class="no">border</span> <span class="kw">&lt;-</span> <span class="st">"gray"</span>
+<span class="co">## we suppose the total event are same (methy + unmethy)</span>
+<span class="co">## we rescale the methylation score by max value of the score </span>
+<span class="no">m</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="no">methy</span>$<span class="no">score</span>)
+<span class="no">methy</span>$<span class="no">score</span> <span class="kw">&lt;-</span> <span class="no">methy</span>$<span class="no">score</span>/<span class="no">m</span>
+<span class="co"># The area of the fan indicate the percentage of methylation or rate of mutation.</span>
+<span class="fu"><a href="https://rdrr.io/pkg/trackViewer/man/dandelion.plot.html">dandelion.plot</a></span>(<span class="no">methy</span>, <span class="no">features</span>, <span class="kw">ranges</span><span class="kw">=</span><span class="no">gr</span>, <span class="kw">type</span><span class="kw">=</span><span class="st">"fan"</span>)</pre></body></html></div>
+<div class="figure">
+<img src="ChIPpeakAnno_files/figure-html/dandelionPlot-1.png" alt="dandelion plot" width="576"><p class="caption">
+dandelion plot
+</p>
+</div>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

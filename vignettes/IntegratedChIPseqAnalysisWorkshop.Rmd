@@ -267,54 +267,7 @@ pfms <- mapply(function(.ele, id)
 motifStack(pfms)
 ```
 
-## Example6: metagene analysis for a given feature/peak range {-#my-section}
-You can easily visualize and compare the binding patterns of raw signals of
-multiple ChIP-seq experiments using function `featureAlignedHeatmap` and `featureAlignedDistribution`.
-
-Heatmap of aligned features.
-
-```{r "heatmap", fig.cap=generateFigureCaption("Heatmap of aligned features sorted by signal of TAF"), fig.width=4, fig.height=6}
-library(rtracklayer)
-
-## recenter features:
-features <- ol$peaklist[[length(ol$peaklist)]]
-feature.recentered <- reCenterPeaks(features, width=4000)
-
-## read in data:
-files <- dir(path, "bigWig")
-if(.Platform$OS.type != "windows"){
-    cvglists <- sapply(file.path(path, files), import,
-                       format="BigWig",
-                       which=feature.recentered,
-                       as="RleList")
-} else {
-    load(file.path(path, "cvglist.rds"))
-}
-
-## extract signal:
-names(cvglists) <- gsub(".bigWig", "", files)
-feature.center <- reCenterPeaks(features, width=1)
-sig <- featureAlignedSignal(cvglists, feature.center,
-                            upstream=2000, downstream=2000)
-
-## output heatmap
-keep <- rowSums(sig[[2]]) > 0
-sig <- sapply(sig, function(.ele) .ele[keep, ], simplify = FALSE)
-feature.center <- feature.center[keep]
-heatmap <- featureAlignedHeatmap(sig, feature.center,
-                                 upstream=2000, downstream=2000,
-                                 upper.extreme=c(3,.5,4))
-```
-
-Distriution of aligned features.
-
-```{r "distribution",fig.cap=generateFigureCaption("Distribution of aligned features"), fig.width=5, fig.height=5}
-featureAlignedDistribution(sig, feature.center,
-                           upstream=2000, downstream=2000,
-                           type="l")
-```
-
-## Example7: obtain enriched GO and pathways {-#my-section}
+## Example6: obtain enriched GO and pathways {-#my-section}
 Please note that by default, _feature_id|_type_ is set to "ensembl\_gene\_id", is you are using **TxDb** for your annotation, please set to "entrez\_id".
 ```{r enrichment}
 library(reactome.db)
@@ -329,14 +282,14 @@ over <- getEnrichedGO(overlaps.anno, orgAnn="org.Hs.eg.db",
 head(over[["mf"]][, -c(3, 10)], n=2)
 
 ## obtain enriched pathways:
-path <- getEnrichedPATH(overlaps.anno, "org.Hs.eg.db", "reactome.db",
+pathway <- getEnrichedPATH(overlaps.anno, "org.Hs.eg.db", "reactome.db",
                         feature_id_type="entrez_id", maxP=.05)
 
 ## show the first two lines:
-head(path, n=2)
+head(pathway, n=2)
 ```
 
-## Example8: determine if there is significant peak overlap among multiple sets {-#my-section}
+## Example7: determine if there is significant peak overlap among multiple sets {-#my-section}
 Given multiple peak lists, to see if the binding sites are correlated and what is the common binding pattern. Two methods: hypergeometric test and permutation test.
 
 #### Method 1: hypergeometric test {-#my-section}
@@ -414,6 +367,54 @@ plot(pt1)
 ## YY1 vs TAF:
 pt2 <- peakPermTest(YY1, TAF, pool=pool, seed=1, force.parallel=FALSE)
 plot(pt2)
+```
+
+## Example8: metagene analysis for a given feature/peak range {-#my-section}
+You can easily visualize and compare the binding patterns of raw signals of
+multiple ChIP-seq experiments using function `featureAlignedHeatmap` and `featureAlignedDistribution`.
+
+Heatmap of aligned features.
+
+```{r "heatmap", fig.cap=generateFigureCaption("Heatmap of aligned features sorted by signal of TAF"), fig.width=4, fig.height=6}
+library(rtracklayer)
+
+## recenter features:
+features <- ol$peaklist[[length(ol$peaklist)]]
+feature.recentered <- reCenterPeaks(features, width=4000)
+
+## read in data:
+path <- system.file("extdata", package="ChIPpeakAnno")
+files <- dir(path, "bigWig")
+if(.Platform$OS.type != "windows"){
+    cvglists <- sapply(file.path(path, files), import,
+                       format="BigWig",
+                       which=feature.recentered,
+                       as="RleList")
+} else {
+    load(file.path(path, "cvglist.rds"))
+}
+
+## extract signal:
+names(cvglists) <- gsub(".bigWig", "", files)
+feature.center <- reCenterPeaks(features, width=1)
+sig <- featureAlignedSignal(cvglists, feature.center,
+                            upstream=2000, downstream=2000)
+
+## output heatmap
+keep <- rowSums(sig[[2]]) > 0
+sig <- sapply(sig, function(.ele) .ele[keep, ], simplify = FALSE)
+feature.center <- feature.center[keep]
+heatmap <- featureAlignedHeatmap(sig, feature.center,
+                                 upstream=2000, downstream=2000,
+                                 upper.extreme=c(3,.5,4))
+```
+
+Distriution of aligned features.
+
+```{r "distribution",fig.cap=generateFigureCaption("Distribution of aligned features"), fig.width=5, fig.height=5}
+featureAlignedDistribution(sig, feature.center,
+                           upstream=2000, downstream=2000,
+                           type="l")
 ```
 
 ## Example9: creating lollipop plot with trackViewer {-#my-section}

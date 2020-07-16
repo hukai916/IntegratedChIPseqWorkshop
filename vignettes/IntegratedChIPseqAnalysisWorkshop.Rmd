@@ -1,7 +1,7 @@
 ---
 title: "Integrated ChIP-seq Analysis Workshop"
-#bibliography: "`r system.file('vignettes', 'bibliography.bib', package = 'integratedchipseqanalysisworkshop')`"
-#csl: "`r system.file('vignettes', 'nature.csl', package = 'integratedchipseqanalysisworkshop')`"
+bibliography: "`r system.file('vignettes', 'bibliography.bib', package = 'integratedchipseqanalysisworkshop')`"
+csl: "`r system.file('vignettes', 'nature.csl', package = 'integratedchipseqanalysisworkshop')`"
 vignette: >
   %\VignetteIndexEntry{integratedchipseqanalysisworkshop}
   %\VignetteEncoding{UTF-8}
@@ -429,7 +429,7 @@ There are 3 steps for generating lollipop plot:
 
 3. Plot lollipop plot.
 
-#### Step1: repare the methylation/variant/mutation data. {-#my-section}
+#### Step1: prepare the methylation/variant/mutation data. {-#my-section}
 ```{r "quickStartStep1"}
 library(trackViewer)
 

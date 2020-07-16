@@ -1,9 +1,0 @@
-pandoc: 2.2.3.2
-pkgdown: 1.5.1
-pkgdown_sha: ~
-articles: []
-last_built: 2020-07-15T23:51Z
-urls:
-  reference: https://hukai916.github.io/IntegratedChIPseqWorkshop/reference
-  article: https://hukai916.github.io/IntegratedChIPseqWorkshop/articles
-

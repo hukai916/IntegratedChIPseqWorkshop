@@ -27,6 +27,7 @@ suppressPackageStartupMessages({
     library(TxDb.Hsapiens.UCSC.hg19.knownGene)
     library(BSgenome.Hsapiens.UCSC.hg19)
     library(org.Hs.eg.db)
+    library(GO.db)
     library(UpSetR)
     library(seqinr)
     library(motifStack)

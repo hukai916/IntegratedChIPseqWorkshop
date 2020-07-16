@@ -676,7 +676,7 @@ Distribution of aligned features
 <h2 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Example9: creating lollipop plot with trackViewer</h2>
 <p>It is routine to show the distribution of mutation or genetic variations by lollipop-style (or needle-style) plot in a genome browser, along with a variety of genomic annotations, such as gene or exon level models, CpG island, and so on.</p>
-<p>For SNP status or methlyation data, lollipop plot is often used. Many tools can provide lollipop plot such as cBioPortal Tools::MutationMapper<span class="citation">[@gao2013integrative]</span>, EMBL-EBI::Pfam<span class="citation">[@finn2006pfam]</span>, and BioJS::muts-needle-plot<span class="citation">[@michael_p_schroeder_2015_14561]</span>, BiQ Analyzer<span class="citation">[@bock2005biq]</span>, and Methylation plotter<span class="citation">[@mallona2014methylation]</span>. The cBioPortal Tools::MutationMapper is a well-known and easy to use online genome browser that can generate high quality figures with mutations by inputing tab-delimited mutation data. In R/Bioconductor, with the Rgraphics system, there are many flexible ways to display methylation data such as <em>MethVisual</em><span class="citation">[@zackay2010methvisual]</span>, <em>REDseq</em><span class="citation">[@zhu4redseq]</span>, and <em>GenVisR</em><span class="citation">[@skidmore2016genvisr]</span>.</p>
+<p>For SNP status or methlyation data, lollipop plot is often used. Many tools can provide lollipop plot such as cBioPortal Tools::MutationMapper<span class="citation"><sup>1</sup></span>, EMBL-EBI::Pfam<span class="citation"><sup>2</sup></span>, and BioJS::muts-needle-plot<span class="citation"><sup>3</sup></span>, BiQ Analyzer<span class="citation"><sup>4</sup></span>, and Methylation plotter<span class="citation"><sup>5</sup></span>. The cBioPortal Tools::MutationMapper is a well-known and easy to use online genome browser that can generate high quality figures with mutations by inputing tab-delimited mutation data. In R/Bioconductor, with the Rgraphics system, there are many flexible ways to display methylation data such as <em>MethVisual</em><span class="citation"><sup>6</sup></span>, <em>REDseq</em><span class="citation"><sup>7</sup></span>, and <em>GenVisR</em><span class="citation"><sup>8</sup></span>.</p>
 <p>Below is a summary of current tools that are available.</p>
 <table class="table">
 <colgroup>
@@ -693,35 +693,35 @@ Distribution of aligned features
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">MutationMapper<span class="citation">[@gao2013integrative]</span>
+<td align="left">MutationMapper<span class="citation"><sup>1</sup></span>
 </td>
 <td align="left">tab-delimited text</td>
 <td align="left">Yes</td>
 <td align="left">interprets mutations with different heights along protein annotations in automatic color theme</td>
 </tr>
 <tr class="even">
-<td align="left">Pfam<span class="citation">[@finn2006pfam]</span>
+<td align="left">Pfam<span class="citation"><sup>2</sup></span>
 </td>
 <td align="left">JSON</td>
 <td align="left">Yes</td>
 <td align="left">could combine different line and head colors with different drawing styles</td>
 </tr>
 <tr class="odd">
-<td align="left">muts-needle-plot<span class="citation">[@michael_p_schroeder_2015_14561]</span>
+<td align="left">muts-needle-plot<span class="citation"><sup>3</sup></span>
 </td>
 <td align="left">JSON</td>
 <td align="left">No</td>
 <td align="left">plots data point with different colors, heights, and size along annotations, and highlighted selcted coordinates</td>
 </tr>
 <tr class="even">
-<td align="left">BiQ Analyzer<span class="citation">[@bock2005biq]</span>
+<td align="left">BiQ Analyzer<span class="citation"><sup>4</sup></span>
 </td>
 <td align="left">BiQ methylation file</td>
 <td align="left">Yes</td>
 <td align="left">interprets methylation status in black &amp; white</td>
 </tr>
 <tr class="odd">
-<td align="left">Methylation plotter<span class="citation">[@mallona2014methylation]</span>
+<td align="left">Methylation plotter<span class="citation"><sup>5</sup></span>
 </td>
 <td align="left">tab-delimited text</td>
 <td align="left">Yes</td>
@@ -729,7 +729,7 @@ Distribution of aligned features
 </tr>
 <tr class="even">
 <td align="left">
-<em>MethVisual</em><span class="citation">[@zackay2010methvisual]</span>
+<em>MethVisual</em><span class="citation"><sup>6</sup></span>
 </td>
 <td align="left">R list</td>
 <td align="left">No</td>
@@ -737,7 +737,7 @@ Distribution of aligned features
 </tr>
 <tr class="odd">
 <td align="left">
-<em>REDseq</em><span class="citation">[@zhu4redseq]</span>
+<em>REDseq</em><span class="citation"><sup>7</sup></span>
 </td>
 <td align="left">R list</td>
 <td align="left">No</td>
@@ -745,7 +745,7 @@ Distribution of aligned features
 </tr>
 <tr class="even">
 <td align="left">
-<em>GenVisR</em><span class="citation">[@skidmore2016genvisr]</span>
+<em>GenVisR</em><span class="citation"><sup>8</sup></span>
 </td>
 <td align="left">R dataframe</td>
 <td align="left">No</td>
@@ -764,7 +764,7 @@ Distribution of aligned features
 </ol>
 <div id="my-section" class="section level4 unnumbered">
 <h4 class="hasAnchor">
-<a href="#my-section" class="anchor"></a>Step1: repare the methylation/variant/mutation data.</h4>
+<a href="#my-section" class="anchor"></a>Step1: prepare the methylation/variant/mutation data.</h4>
 <div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">trackViewer</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123</span>)
@@ -995,6 +995,32 @@ lollipop plot, caterpillar layout
 <img src="IntegratedChIPseqAnalysisWorkshop_files/figure-html/dandelionPlot-1.png" alt="dandelion plot" width="576"><p class="caption">
 dandelion plot
 </p>
+</div>
+<div id="refs" class="references">
+<div id="ref-gao2013integrative">
+<p>1. Gao, J. <em>et al.</em> Integrative analysis of complex cancer genomics and clinical profiles using the cBioPortal. <em>Science signaling</em> <strong>6,</strong> pl1 (2013).</p>
+</div>
+<div id="ref-finn2006pfam">
+<p>2. Finn, R. D. <em>et al.</em> Pfam: Clans, web tools and services. <em>Nucleic acids research</em> <strong>34,</strong> D247–D251 (2006).</p>
+</div>
+<div id="ref-michael_p_schroeder_2015_14561">
+<p>3. Schroeder, M. P. Muts-needle-plot: Mutations needle plot v0.8.0. (2015). doi:<a href="https://doi.org/10.5281/zenodo.14561">10.5281/zenodo.14561</a></p>
+</div>
+<div id="ref-bock2005biq">
+<p>4. Bock, C. <em>et al.</em> BiQ analyzer: Visualization and quality control for dna methylation data from bisulfite sequencing. <em>Bioinformatics</em> <strong>21,</strong> 4067–4068 (2005).</p>
+</div>
+<div id="ref-mallona2014methylation">
+<p>5. Mallona, I., Dı́ez-Villanueva, A. &amp; Peinado, M. A. Methylation plotter: A web tool for dynamic visualization of dna methylation data. <em>Source code for biology and medicine</em> <strong>9,</strong> 1 (2014).</p>
+</div>
+<div id="ref-zackay2010methvisual">
+<p>6. Zackay, A. &amp; Steinhoff, C. MethVisual-visualization and exploratory statistical analysis of dna methylation profiles from bisulfite sequencing. <em>BMC research notes</em> <strong>3,</strong> 337 (2010).</p>
+</div>
+<div id="ref-zhu4redseq">
+<p>7. Zhu, L. &amp; others. REDseq: A bioconductor package for analyzing high throughput sequencing data from restriction enzyme digestion.</p>
+</div>
+<div id="ref-skidmore2016genvisr">
+<p>8. Skidmore, Z. L. <em>et al.</em> GenVisR: Genomic visualizations in r. <em>Bioinformatics</em> btw325 (2016).</p>
+</div>
 </div>
 </div>
   </div>

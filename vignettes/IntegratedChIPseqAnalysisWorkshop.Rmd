@@ -1,7 +1,7 @@
 ---
 title: "Integrated ChIP-seq Data Analysis Workshop"
-bibliography: "`r system.file('vignettes', 'bibliography.bib', package = 'integratedchipseqanalysisworkshop')`"
-csl: "`r system.file('vignettes', 'nature.csl', package = 'integratedchipseqanalysisworkshop')`"
+#bibliography: "`r system.file('vignettes', 'bibliography.bib', package = 'integratedchipseqanalysisworkshop')`"
+#csl: "`r system.file('vignettes', 'nature.csl', package = 'integratedchipseqanalysisworkshop')`"
 vignette: >
   %\VignetteIndexEntry{integratedchipseqanalysisworkshop}
   %\VignetteEncoding{UTF-8}
@@ -230,7 +230,7 @@ Many methods are available:
 
 2. Compare pre-defined patterns against target consensus patterns with `summarizePatternInPeaks` module.
 
-3. Calculate the z-scores for all combinations of oligonucleotide at a given length with the `oligoSmmary` module.
+3. Calculate the z-scores for all combinations of oligonucleotide at a given length with the `oligoSummary` module.
 
 Below demonstrates method 3.
 ```{r "consensus", fig.cap=generateFigureCaption("Histogram of Z-score of 6-mer"), fig.height=3, fig.width=6}

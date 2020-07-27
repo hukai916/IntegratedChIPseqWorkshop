@@ -10,7 +10,17 @@ Authors@R:
            family = "Ou",
            role = c("aut"),
            email = "jianhong.ou@duke.edu",
-           comment = c(ORCID = "0000-0002-8652-2488")))
+           comment = c(ORCID = "0000-0002-8652-2488")),
+      person(given = "Haibo",
+           family = "Liu",
+           role = c("aut"),
+           email = "haibo.liu@umassmed.edu"),
+      person(given = "Lihua Julie",
+           family = "Zhu",
+           role = c("aut"),
+           email = "julie.zhu@umassmed.edu",
+           comment = c(ORCID = "0000-0001-7416-0590"))
+           )
 Description: This package discusses the current best practices for ChIP-seq analysis with R packages.
 License: MIT + file LICENSE
 Encoding: UTF-8

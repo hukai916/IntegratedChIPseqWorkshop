@@ -115,7 +115,6 @@
     <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rtracklayer</span>)
     <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rmarkdown</span>)
     <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">knitr</span>)})</pre></body></html></div>
-<pre><code>## Warning: package 'knitr' was built under R version 4.0.2</code></pre>
 </div>
 <div id="my-section" class="section level2 unnumbered">
 <h2 class="hasAnchor">
@@ -132,7 +131,7 @@
 <a href="#my-section" class="anchor"></a>Step1: read in peak data</h3>
 <p>We first need to convert peak files from bed/broadPeak/narrowPeak etc. format to <code>GRanges</code> object with <code>toGRanges</code> function.</p>
 <p>For the demo, we will use the example data stored in ChIPpeakAnno package.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">## locate example data:</span>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co">## locate example data:</span>
 <span class="no">path</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"Tead4.broadPeak"</span>, <span class="kw">package</span><span class="kw">=</span><span class="st">"ChIPpeakAnno"</span>)
 
 <span class="co">## read in peak file:</span>
@@ -158,7 +157,7 @@
 <p>Depending on your research goals, you can choose to use either ENSEMBL or UCSC annotations.</p>
 <p>The more complex ENSEMBL annotation is preferred when the goal is to discover and explain unknown biological mechanisms.</p>
 <p>The less complex UCSC annotation can be used to generate more robust and reproducible results.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>)
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>)
 
 <span class="no">annoDataTxDb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/toGRanges.html">toGRanges</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>)
 
@@ -175,7 +174,7 @@
 <div id="my-section" class="section level3 unnumbered">
 <h3 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Step3: annotate peaks</h3>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co">## annotate by the nearest TSS based on UCSC hg19 annotations</span>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co">## annotate by the nearest TSS based on UCSC hg19 annotations</span>
 <span class="no">annoTxDb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/annotatePeakInBatch.html">annotatePeakInBatch</a></span>(<span class="no">peaks</span>, <span class="kw">AnnotationData</span><span class="kw">=</span><span class="no">annoDataTxDb</span>)
 
 <span class="co">## inspect the first two lines of the annotation:</span>
@@ -203,7 +202,7 @@
 <div id="my-section" class="section level3 unnumbered">
 <h3 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Step4: add additional annotation</h3>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">org.Hs.eg.db</span>)
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">org.Hs.eg.db</span>)
 
 <span class="co">## add in gene symbol</span>
 <span class="no">annoTxDb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/addGeneIDs.html">addGeneIDs</a></span>(<span class="no">annoTxDb</span>, <span class="kw">orgAnn</span><span class="kw">=</span><span class="st">"org.Hs.eg.db"</span>,
@@ -244,7 +243,7 @@
 <li><p>overlappingPeaks: a list of data frame that consists of the annotations of all overlapping peaks</p></li>
 </ol>
 <p>Below, we would like to find the overlaps between two peak files: one from BED, the other from GFF.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ChIPpeakAnno</span>)
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ChIPpeakAnno</span>)
 
 <span class="co">## convert BED file to GRanges:</span>
 <span class="no">bed</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"MACS_output.bed"</span>, <span class="kw">package</span><span class="kw">=</span><span class="st">"ChIPpeakAnno"</span>)
@@ -276,7 +275,7 @@
 ##   [2]    29.170
 ##   -------
 ##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co">## make a Venn diagram:</span>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co">## make a Venn diagram:</span>
 <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">makeVennDiagram</a></span>(<span class="no">ol</span>, <span class="kw">fill</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>),
                      <span class="kw">col</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#D55E00"</span>, <span class="st">"#0072B2"</span>),
                  <span class="kw">cat.col</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#D55E00"</span>, <span class="st">"#0072B2"</span>))</pre></body></html></div>
@@ -307,7 +306,7 @@ Venn diagram of overlaps for replicates
 <div id="my-section" class="section level4 unnumbered">
 <h4 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Binding site relative to features</h4>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>)
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>)
 
 <span class="co">## get overlapping peaks:</span>
 <span class="no">overlaps</span> <span class="kw">&lt;-</span> <span class="no">ol</span>$<span class="no">peaklist</span><span class="kw">[[</span><span class="st">"gr1///gr2"</span>]]
@@ -333,7 +332,7 @@ Peak distribution over different genomic features.
 <div id="my-section" class="section level4 unnumbered">
 <h4 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Peak distance distribution to nearest feature</h4>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/binOverFeature.html">binOverFeature</a></span>(<span class="no">overlaps</span>, <span class="kw">annotationData</span><span class="kw">=</span><span class="no">annoDataTxDb</span>,
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/binOverFeature.html">binOverFeature</a></span>(<span class="no">overlaps</span>, <span class="kw">annotationData</span><span class="kw">=</span><span class="no">annoDataTxDb</span>,
                <span class="kw">radius</span><span class="kw">=</span><span class="fl">5000</span>, <span class="kw">nbins</span><span class="kw">=</span><span class="fl">20</span>, <span class="kw">FUN</span><span class="kw">=</span><span class="no">length</span>, <span class="kw">errFun</span><span class="kw">=</span><span class="fl">0</span>,
                <span class="kw">ylab</span><span class="kw">=</span><span class="st">"count"</span>,
                <span class="kw">main</span><span class="kw">=</span><span class="st">"Distribution of aggregated peak numbers around TSS"</span>)</pre></body></html></div>
@@ -346,7 +345,7 @@ Distribution of peaks around TSS.
 <div id="my-section" class="section level4 unnumbered">
 <h4 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Annotate peaks to promoter regions (-500bp ~ +2000bp)</h4>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">org.Hs.eg.db</span>)
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">org.Hs.eg.db</span>)
 
 <span class="co">## annotate to promoter regions:</span>
 <span class="no">overlaps.anno</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/annotatePeakInBatch.html">annotatePeakInBatch</a></span>(<span class="no">overlaps</span>,
@@ -383,7 +382,7 @@ Distribution of peaks around TSS.
 <h2 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Example4: find peaks with bi-directional promoters</h2>
 <p>Bi-directional promoters refer to genomic regions that are located between TSS of two adjacent genes that are transcribed on opposite directions. Bi-directional promoters often regulate both genes.</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="co">## find bi-directional promoters:</span>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="co">## find bi-directional promoters:</span>
 <span class="no">bdp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/peaksNearBDP.html">peaksNearBDP</a></span>(<span class="no">overlaps</span>, <span class="no">annoDataTxDb</span>, <span class="kw">maxgap</span><span class="kw">=</span><span class="fl">5000</span>)
 
 <span class="co">## some statistics:</span>
@@ -391,7 +390,7 @@ Distribution of peaks around TSS.
   <span class="no">bdp</span>$<span class="no">n.peaks</span>,
   <span class="no">bdp</span>$<span class="no">n.peaksWithBDP</span>)</pre></body></html></div>
 <pre><code>## [1]   0.05421687 166.00000000   9.00000000</code></pre>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="co">## show first two lines:</span>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="co">## show first two lines:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">bdp</span>$<span class="no">peaksWithBDP</span>, <span class="kw">n</span><span class="kw">=</span><span class="fl">2</span>)</pre></body></html></div>
 <pre><code>## GRangesList object of length 2:
 ## $`4`
@@ -435,10 +434,10 @@ Distribution of peaks around TSS.
 <ol style="list-style-type: decimal">
 <li><p>Use <code>getAllPeakSequence</code> module to output fastq file and sesarch the motif by other tools like MEME and HOMER.</p></li>
 <li><p>Compare pre-defined patterns against target consensus patterns with <code>summarizePatternInPeaks</code> module.</p></li>
-<li><p>Calculate the z-scores for all combinations of oligonucleotide at a given length with the <code>oligoSmmary</code> module.</p></li>
+<li><p>Calculate the z-scores for all combinations of oligonucleotide at a given length with the <code>oligoSummary</code> module.</p></li>
 </ol>
 <p>Below demonstrates method 3.</p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">seqinr</span>)
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">seqinr</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">BSgenome.Hsapiens.UCSC.hg19</span>)
 
 <span class="co">## obtain peak sequences:</span>
@@ -463,7 +462,7 @@ Histogram of Z-score of 6-mer
 </p>
 </div>
 <p>Generate motif using simulated data.</p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">motifStack</span>)
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">motifStack</span>)
 
 <span class="co">## generate the motifs:</span>
 <span class="no">pfms</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span>(<span class="kw">function</span>(<span class="no">.ele</span>, <span class="no">id</span>)
@@ -480,7 +479,7 @@ Motif of simulation data
 <h2 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Example6: obtain enriched GO and pathways</h2>
 <p>Please note that by default, _feature_id|<em>type</em> is set to “ensembl_gene_id”, is you are using <strong>TxDb</strong> for your annotation, please set to “entrez_id”.</p>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">reactome.db</span>)
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">reactome.db</span>)
 
 <span class="co">## obtain enriched GO term:</span>
 <span class="no">over</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/getEnrichedGO.html">getEnrichedGO</a></span>(<span class="no">overlaps.anno</span>, <span class="kw">orgAnn</span><span class="kw">=</span><span class="st">"org.Hs.eg.db"</span>,
@@ -494,7 +493,7 @@ Motif of simulation data
 ## [5] count.InDataset    count.InGenome     totaltermInDataset totaltermInGenome 
 ## [9] EntrezID          
 ## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="co">## obtain enriched pathways:</span>
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="co">## obtain enriched pathways:</span>
 <span class="no">pathway</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/getEnrichedPATH.html">getEnrichedPATH</a></span>(<span class="no">overlaps.anno</span>, <span class="st">"org.Hs.eg.db"</span>, <span class="st">"reactome.db"</span>,
                         <span class="kw">feature_id_type</span><span class="kw">=</span><span class="st">"entrez_id"</span>, <span class="kw">maxP</span><span class="kw">=</span><span class="fl">.05</span>)
 
@@ -516,13 +515,13 @@ Motif of simulation data
 <a href="#my-section" class="anchor"></a>Method 1: hypergeometric test</h4>
 <p>This method requires the number of all potential binding sites to be known. You need to set the <em>totalTest</em> (total potential peak number) in the <code>makeVennDiagram</code> module. The value should be larger than the max number of peaks in the peak list.</p>
 <p>In the example below, we assume a 3% coding region plus promoters. Since the sample data is only a subset of chr2, we estimate that the total binding sites is 1/24 of possible binding region in the genome.</p>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="co">## read in data: TAF, Tead4 and YY1</span>
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="co">## read in data: TAF, Tead4 and YY1</span>
 <span class="no">path</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="kw">package</span><span class="kw">=</span><span class="st">"ChIPpeakAnno"</span>)
 <span class="no">files</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">dir</a></span>(<span class="no">path</span>, <span class="st">"broadPeak"</span>)
 <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">path</span>, <span class="no">files</span>), <span class="no">toGRanges</span>, <span class="kw">format</span><span class="kw">=</span><span class="st">"broadPeak"</span>)
 (<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">data</span>) <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">".broadPeak"</span>, <span class="st">""</span>, <span class="no">files</span>))</pre></body></html></div>
 <pre><code>## [1] "TAF"   "Tead4" "YY1"</code></pre>
-<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="co">## find overlapped peaks:</span>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="co">## find overlapped peaks:</span>
 <span class="no">ol</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/findOverlapsOfPeaks.html">findOverlapsOfPeaks</a></span>(<span class="no">data</span>, <span class="kw">connectedPeaks</span><span class="kw">=</span><span class="st">"keepAll"</span>)
 
 <span class="co">## avergage of peak width:</span>
@@ -560,7 +559,7 @@ Venn diagram of overlaps.
 ## attr(,"class")
 ## [1] "VennCounts"</code></pre>
 <p>Keep first list consistent.</p>
-<div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="co">## set connectedPeaks to keepFirstListConsistent will show consistent total number of peaks for the first peak list.</span>
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="co">## set connectedPeaks to keepFirstListConsistent will show consistent total number of peaks for the first peak list.</span>
 <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">makeVennDiagram</a></span>(<span class="no">ol</span>, <span class="kw">totalTest</span><span class="kw">=</span><span class="no">tot</span>, <span class="kw">connectedPeaks</span><span class="kw">=</span><span class="st">"keepFirstListConsistent"</span>,
                 <span class="kw">fill</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#CC79A7"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#F0E442"</span>),
                 <span class="kw">col</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#D55E00"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#E69F00"</span>),
@@ -595,7 +594,7 @@ Venn diagram of overlaps for first TF.
 <p>With <code>peakPermTest</code>, users don’t need to estimate total potential binding sites.</p>
 <p>Before permutation test, random peaks need to be generated using the distribution discovered from the input peak for a given feature type. Alternatively, a peak pool can be prepared with <code>preparePool</code> module. Below is an exmple using the transcription factor binding site clusters (V3) (see ?<code>wgEncodeTfbsV3</code>) downloaded from <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeRegTfbsClustered/wgEncodeRegTfbsClusteredV3.bed.gz">ENCODE</a> with the HOT spots (?<code>HOT.spots</code>) removed.</p>
 <p>HOT spots are regions with probability to be bound by many TFs. We suggest to remove them before the test. Users can also choose to remove blacklist <a href="https://sites.google.com/site/anshulkundaje/projects/blacklists">ENCODE blacklist</a> regions. Note that some blacklists need to be converted to the correct genome assembly with liftover utility.</p>
-<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="co">## read in data:</span>
+<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="co">## read in data:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">HOT.spots</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">wgEncodeTfbsV3</span>)
 <span class="no">hotGR</span> <span class="kw">&lt;-</span> <span class="fu">reduce</span>(<span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(<span class="no">HOT.spots</span>))
@@ -623,7 +622,7 @@ Venn diagram of overlaps for first TF.
 permutation test for YY1 and TEAD4
 </p>
 </div>
-<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="co">## YY1 vs TAF:</span>
+<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="co">## YY1 vs TAF:</span>
 <span class="no">pt2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/peakPermTest.html">peakPermTest</a></span>(<span class="no">YY1</span>, <span class="no">TAF</span>, <span class="kw">pool</span><span class="kw">=</span><span class="no">pool</span>, <span class="kw">seed</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">force.parallel</span><span class="kw">=</span><span class="fl">FALSE</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/motifStack/man/pcm-class.html">plot</a></span>(<span class="no">pt2</span>)</pre></body></html></div>
 <div class="figure">
@@ -638,7 +637,7 @@ permutation test for YY1 and TAF
 <a href="#my-section" class="anchor"></a>Example8: metagene analysis for a given feature/peak range</h2>
 <p>You can easily visualize and compare the binding patterns of raw signals of multiple ChIP-seq experiments using function <code>featureAlignedHeatmap</code> and <code>featureAlignedDistribution</code>.</p>
 <p>Heatmap of aligned features.</p>
-<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rtracklayer</span>)
+<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rtracklayer</span>)
 
 <span class="co">## recenter features:</span>
 <span class="no">features</span> <span class="kw">&lt;-</span> <span class="no">ol</span>$<span class="no">peaklist</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">ol</span>$<span class="no">peaklist</span>)]]
@@ -675,7 +674,7 @@ Heatmap of aligned features sorted by signal of TAF
 </p>
 </div>
 <p>Distriution of aligned features.</p>
-<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/featureAlignedDistribution.html">featureAlignedDistribution</a></span>(<span class="no">sig</span>, <span class="no">feature.center</span>,
+<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/featureAlignedDistribution.html">featureAlignedDistribution</a></span>(<span class="no">sig</span>, <span class="no">feature.center</span>,
                            <span class="kw">upstream</span><span class="kw">=</span><span class="fl">2000</span>, <span class="kw">downstream</span><span class="kw">=</span><span class="fl">2000</span>,
                            <span class="kw">type</span><span class="kw">=</span><span class="st">"l"</span>)</pre></body></html></div>
 <div class="figure">
@@ -688,7 +687,7 @@ Distribution of aligned features
 <h2 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Example9: creating lollipop plot with trackViewer</h2>
 <p>It is routine to show the distribution of mutation or genetic variations by lollipop-style (or needle-style) plot in a genome browser, along with a variety of genomic annotations, such as gene or exon level models, CpG island, and so on.</p>
-<p>For SNP status or methlyation data, lollipop plot is often used. Many tools can provide lollipop plot such as cBioPortal Tools::MutationMapper<span class="citation"><sup>1</sup></span>, EMBL-EBI::Pfam<span class="citation"><sup>2</sup></span>, and BioJS::muts-needle-plot<span class="citation"><sup>3</sup></span>, BiQ Analyzer<span class="citation"><sup>4</sup></span>, and Methylation plotter<span class="citation"><sup>5</sup></span>. The cBioPortal Tools::MutationMapper is a well-known and easy to use online genome browser that can generate high quality figures with mutations by inputing tab-delimited mutation data. In R/Bioconductor, with the Rgraphics system, there are many flexible ways to display methylation data such as <em>MethVisual</em><span class="citation"><sup>6</sup></span>, <em>REDseq</em><span class="citation"><sup>7</sup></span>, and <em>GenVisR</em><span class="citation"><sup>8</sup></span>.</p>
+<p>For SNP status or methlyation data, lollipop plot is often used. Many tools can provide lollipop plot such as cBioPortal Tools::MutationMapper<span class="citation">[@gao2013integrative]</span>, EMBL-EBI::Pfam<span class="citation">[@finn2006pfam]</span>, and BioJS::muts-needle-plot<span class="citation">[@michael_p_schroeder_2015_14561]</span>, BiQ Analyzer<span class="citation">[@bock2005biq]</span>, and Methylation plotter<span class="citation">[@mallona2014methylation]</span>. The cBioPortal Tools::MutationMapper is a well-known and easy to use online genome browser that can generate high quality figures with mutations by inputing tab-delimited mutation data. In R/Bioconductor, with the Rgraphics system, there are many flexible ways to display methylation data such as <em>MethVisual</em><span class="citation">[@zackay2010methvisual]</span>, <em>REDseq</em><span class="citation">[@zhu4redseq]</span>, and <em>GenVisR</em><span class="citation">[@skidmore2016genvisr]</span>.</p>
 <p>Below is a summary of current tools that are available.</p>
 <table class="table">
 <colgroup>
@@ -705,35 +704,35 @@ Distribution of aligned features
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">MutationMapper<span class="citation"><sup>1</sup></span>
+<td align="left">MutationMapper<span class="citation">[@gao2013integrative]</span>
 </td>
 <td align="left">tab-delimited text</td>
 <td align="left">Yes</td>
 <td align="left">interprets mutations with different heights along protein annotations in automatic color theme</td>
 </tr>
 <tr class="even">
-<td align="left">Pfam<span class="citation"><sup>2</sup></span>
+<td align="left">Pfam<span class="citation">[@finn2006pfam]</span>
 </td>
 <td align="left">JSON</td>
 <td align="left">Yes</td>
 <td align="left">could combine different line and head colors with different drawing styles</td>
 </tr>
 <tr class="odd">
-<td align="left">muts-needle-plot<span class="citation"><sup>3</sup></span>
+<td align="left">muts-needle-plot<span class="citation">[@michael_p_schroeder_2015_14561]</span>
 </td>
 <td align="left">JSON</td>
 <td align="left">No</td>
 <td align="left">plots data point with different colors, heights, and size along annotations, and highlighted selcted coordinates</td>
 </tr>
 <tr class="even">
-<td align="left">BiQ Analyzer<span class="citation"><sup>4</sup></span>
+<td align="left">BiQ Analyzer<span class="citation">[@bock2005biq]</span>
 </td>
 <td align="left">BiQ methylation file</td>
 <td align="left">Yes</td>
 <td align="left">interprets methylation status in black &amp; white</td>
 </tr>
 <tr class="odd">
-<td align="left">Methylation plotter<span class="citation"><sup>5</sup></span>
+<td align="left">Methylation plotter<span class="citation">[@mallona2014methylation]</span>
 </td>
 <td align="left">tab-delimited text</td>
 <td align="left">Yes</td>
@@ -741,7 +740,7 @@ Distribution of aligned features
 </tr>
 <tr class="even">
 <td align="left">
-<em>MethVisual</em><span class="citation"><sup>6</sup></span>
+<em>MethVisual</em><span class="citation">[@zackay2010methvisual]</span>
 </td>
 <td align="left">R list</td>
 <td align="left">No</td>
@@ -749,7 +748,7 @@ Distribution of aligned features
 </tr>
 <tr class="odd">
 <td align="left">
-<em>REDseq</em><span class="citation"><sup>7</sup></span>
+<em>REDseq</em><span class="citation">[@zhu4redseq]</span>
 </td>
 <td align="left">R list</td>
 <td align="left">No</td>
@@ -757,7 +756,7 @@ Distribution of aligned features
 </tr>
 <tr class="even">
 <td align="left">
-<em>GenVisR</em><span class="citation"><sup>8</sup></span>
+<em>GenVisR</em><span class="citation">[@skidmore2016genvisr]</span>
 </td>
 <td align="left">R dataframe</td>
 <td align="left">No</td>
@@ -777,7 +776,7 @@ Distribution of aligned features
 <div id="my-section" class="section level4 unnumbered">
 <h4 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Step1: repare the methylation/variant/mutation data.</h4>
-<div class="sourceCode" id="cb39"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">trackViewer</span>)
+<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">trackViewer</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123</span>)
 
@@ -799,7 +798,7 @@ Distribution of aligned features
 <div id="my-section" class="section level4 unnumbered">
 <h4 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Step2: prepare the gene/protein model.</h4>
-<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">features.gr</span> <span class="kw">&lt;-</span> <span class="fu">GRanges</span>(<span class="st">"chr1"</span>, <span class="fu">IRanges</span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">501</span>, <span class="fl">1001</span>),
+<div class="sourceCode" id="cb39"><html><body><pre class="r"><span class="no">features.gr</span> <span class="kw">&lt;-</span> <span class="fu">GRanges</span>(<span class="st">"chr1"</span>, <span class="fu">IRanges</span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">501</span>, <span class="fl">1001</span>),
                                        <span class="kw">width</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">120</span>, <span class="fl">400</span>, <span class="fl">405</span>),
                                        <span class="kw">names</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"exon"</span>, <span class="fl">1</span>:<span class="fl">3</span>)),
                                                      <span class="kw">fill</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#FF8833"</span>, <span class="st">"#51C6E6"</span>, <span class="st">"#DFA32D"</span>), <span class="co">## color for exon</span>
@@ -809,7 +808,7 @@ Distribution of aligned features
 <div id="my-section" class="section level4 unnumbered">
 <h4 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Step3: plot lollipop plot</h4>
-<div class="sourceCode" id="cb41"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/trackViewer/man/lolliplot.html">lolliplot</a></span>(<span class="no">sample.gr</span>, <span class="no">features.gr</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/trackViewer/man/lolliplot.html">lolliplot</a></span>(<span class="no">sample.gr</span>, <span class="no">features.gr</span>)</pre></body></html></div>
 <p><img src="IntegratedChIPseqAnalysisWorkshop_files/figure-html/quickStartStep3-1.png" width="576"></p>
 </div>
 </div>
@@ -818,7 +817,7 @@ Distribution of aligned features
 <a href="#my-section" class="anchor"></a>Example10: plot from VCF file with trackViewer</h2>
 <p>VCF is a text file format that contains metadata and mutation information about genomic positions, original genotypes and optional genotypes.</p>
 <p>The <em>trackViewer</em> package can show single nucleotide polymorphisms (SNPs) from VCF file in lollipop plot. Figure @ref(fig:plotVCFdata) shows an example lollipop plot of real SNPs. Sample SNPs are a subset of 1000 variants and 50 samples from chromosome 22 taken from 1000 Genomes in VCF in the <em>VariantAnnotation</em> package. Different colors depict the new SNP events in the circles. The number of circles indicates the number of SNP events.</p>
-<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">VariantAnnotation</span>) <span class="co">## load package for reading vcf file</span>
+<div class="sourceCode" id="cb41"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">VariantAnnotation</span>) <span class="co">## load package for reading vcf file</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>) <span class="co">## load package for gene model</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">org.Hs.eg.db</span>) <span class="co">## load package for gene name</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rtracklayer</span>)
@@ -882,7 +881,7 @@ lollipop plot for VCF data
 <a href="#my-section" class="anchor"></a>Example11: plot methylation data from BED file with trackViewer</h2>
 <p>Any type of data that can be imported into a <code>GRanges</code> object can be viewed by <em>trackViewer</em> package.</p>
 <p>Sample methylations are random data generated for illustration and are saved in BED format file. The <em>rtracklayer</em> package is used to import the methylation data into a <code>GRanges</code>. The transcripts are extracted from <code>TxDb</code> object and are assigned gene symbol with <code>org</code> database. We also demonstrate that multiple transcripts can be shown in different colors and tracks.</p>
-<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>) <span class="co">## load package for gene model</span>
+<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TxDb.Hsapiens.UCSC.hg19.knownGene</span>) <span class="co">## load package for gene model</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">org.Hs.eg.db</span>) <span class="co">## load package for gene name</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rtracklayer</span>)
 
@@ -929,7 +928,7 @@ lollipop plot, pie layout
 <h2 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Example12: plot lollipop plot for multiple patients in “pie.stack” layout with trackViewer</h2>
 <p>The percentage of methylation rates are shown by pie graph in different layers for different patients.</p>
-<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="co">## simulate multiple patients</span>
+<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="co">## simulate multiple patients</span>
 <span class="no">rand.id</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">methy</span>), <span class="fl">3</span>*<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">methy</span>), <span class="kw">replace</span><span class="kw">=</span><span class="fl">TRUE</span>)
 <span class="no">rand.id</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(<span class="no">rand.id</span>)
 <span class="no">methy.mul.patient</span> <span class="kw">&lt;-</span> <span class="no">methy</span>[<span class="no">rand.id</span>]
@@ -974,7 +973,7 @@ lollipop plot, pie.stack layout
 <h2 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Example13: plot lollipop plot in caterpillar layout to compare two samples with trackViewer</h2>
 <p>The caterpillar layout can be used to compare two samples or to display dense data side by side.</p>
-<div class="sourceCode" id="cb45"><html><body><pre class="r"><span class="co">## use SNPsideID to set the layer of event</span>
+<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="co">## use SNPsideID to set the layer of event</span>
 <span class="no">sample.gr</span>$<span class="no">SNPsideID</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"top"</span>, <span class="st">"bottom"</span>),
                                <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">sample.gr</span>),
                                <span class="kw">replace</span><span class="kw">=</span><span class="fl">TRUE</span>)
@@ -989,10 +988,10 @@ lollipop plot, caterpillar layout
 <h2 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Example14: dandelion plot hundreds SNPs with trackViewer</h2>
 <p>Sometimes, there are as many as hundreds of SNPs or methylation status involved in one gene. Dandelion plot can be used to depict such dense SNPs or methylation. Please note that the height of the dandelion indicates the density of the events.</p>
-<div class="sourceCode" id="cb46"><html><body><pre class="r"><span class="no">methy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rtracklayer/man/export.html">import</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"methy.bed"</span>, <span class="kw">package</span><span class="kw">=</span><span class="st">"trackViewer"</span>), <span class="st">"BED"</span>)
+<div class="sourceCode" id="cb45"><html><body><pre class="r"><span class="no">methy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rtracklayer/man/export.html">import</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"methy.bed"</span>, <span class="kw">package</span><span class="kw">=</span><span class="st">"trackViewer"</span>), <span class="st">"BED"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">methy</span>)</pre></body></html></div>
 <pre><code>## [1] 38</code></pre>
-<div class="sourceCode" id="cb48"><html><body><pre class="r"><span class="co">## set the color of dandelion leaves.</span>
+<div class="sourceCode" id="cb47"><html><body><pre class="r"><span class="co">## set the color of dandelion leaves.</span>
 <span class="no">methy</span>$<span class="no">color</span> <span class="kw">&lt;-</span> <span class="fl">3</span>
 <span class="no">methy</span>$<span class="no">border</span> <span class="kw">&lt;-</span> <span class="st">"gray"</span>
 
@@ -1008,32 +1007,6 @@ lollipop plot, caterpillar layout
 dandelion plot
 </p>
 </div>
-<div id="refs" class="references">
-<div id="ref-gao2013integrative">
-<p>1. Gao, J. <em>et al.</em> Integrative analysis of complex cancer genomics and clinical profiles using the cBioPortal. <em>Science signaling</em> <strong>6,</strong> pl1 (2013).</p>
-</div>
-<div id="ref-finn2006pfam">
-<p>2. Finn, R. D. <em>et al.</em> Pfam: Clans, web tools and services. <em>Nucleic acids research</em> <strong>34,</strong> D247–D251 (2006).</p>
-</div>
-<div id="ref-michael_p_schroeder_2015_14561">
-<p>3. Schroeder, M. P. Muts-needle-plot: Mutations needle plot v0.8.0. (2015). doi:<a href="https://doi.org/10.5281/zenodo.14561">10.5281/zenodo.14561</a></p>
-</div>
-<div id="ref-bock2005biq">
-<p>4. Bock, C. <em>et al.</em> BiQ analyzer: Visualization and quality control for dna methylation data from bisulfite sequencing. <em>Bioinformatics</em> <strong>21,</strong> 4067–4068 (2005).</p>
-</div>
-<div id="ref-mallona2014methylation">
-<p>5. Mallona, I., Dı́ez-Villanueva, A. &amp; Peinado, M. A. Methylation plotter: A web tool for dynamic visualization of dna methylation data. <em>Source code for biology and medicine</em> <strong>9,</strong> 1 (2014).</p>
-</div>
-<div id="ref-zackay2010methvisual">
-<p>6. Zackay, A. &amp; Steinhoff, C. MethVisual-visualization and exploratory statistical analysis of dna methylation profiles from bisulfite sequencing. <em>BMC research notes</em> <strong>3,</strong> 337 (2010).</p>
-</div>
-<div id="ref-zhu4redseq">
-<p>7. Zhu, L. &amp; others. REDseq: A bioconductor package for analyzing high throughput sequencing data from restriction enzyme digestion.</p>
-</div>
-<div id="ref-skidmore2016genvisr">
-<p>8. Skidmore, Z. L. <em>et al.</em> GenVisR: Genomic visualizations in r. <em>Bioinformatics</em> btw325 (2016).</p>
-</div>
-</div>
 </div>
   </div>
 
@@ -1048,7 +1021,7 @@ dandelion plot
 
 
       <footer><div class="copyright">
-  <p>Developed by Kai Hu, Jianhong Ou.</p>
+  <p>Developed by Kai Hu, Jianhong Ou, Haibo Liu, Lihua Julie Zhu.</p>
 </div>
 
 <div class="pkgdown">

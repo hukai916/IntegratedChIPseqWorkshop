@@ -82,7 +82,7 @@
 
       
 
-      </header><script src="IntegratedChIPseqAnalysisWorkshop_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Integrated ChIP-seq Data Analysis Workshop</h1>
@@ -434,7 +434,7 @@ Distribution of peaks around TSS.
 <ol style="list-style-type: decimal">
 <li><p>Use <code>getAllPeakSequence</code> module to output fastq file and sesarch the motif by other tools like MEME and HOMER.</p></li>
 <li><p>Compare pre-defined patterns against target consensus patterns with <code>summarizePatternInPeaks</code> module.</p></li>
-<li><p>Calculate the z-scores for all combinations of oligonucleotide at a given length with the <code>oligoSummary</code> module.</p></li>
+<li><p>Calculate the z-scores for all combinations of oligonucleotide at a given length with the <code>oligoSmmary</code> module.</p></li>
 </ol>
 <p>Below demonstrates method 3.</p>
 <div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">seqinr</span>)
@@ -616,7 +616,7 @@ Venn diagram of overlaps for first TF.
 <span class="co">## YY1 vs TEAD4:</span>
 <span class="no">pool</span> <span class="kw">&lt;-</span> <span class="fu">new</span>(<span class="st">"permPool"</span>, <span class="kw">grs</span><span class="kw">=</span><span class="fu">GRangesList</span>(<span class="no">wgEncodeTfbsV3.subset</span>), <span class="kw">N</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">YY1</span>))
 <span class="no">pt1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/peakPermTest.html">peakPermTest</a></span>(<span class="no">YY1</span>, <span class="no">TEAD4</span>, <span class="kw">pool</span><span class="kw">=</span><span class="no">pool</span>, <span class="kw">seed</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">force.parallel</span><span class="kw">=</span><span class="fl">FALSE</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/motifStack/man/pcm-class.html">plot</a></span>(<span class="no">pt1</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">pt1</span>)</pre></body></html></div>
 <div class="figure">
 <img src="IntegratedChIPseqAnalysisWorkshop_files/figure-html/peakPermTest-1.png" alt="permutation test for YY1 and TEAD4" width="576"><p class="caption">
 permutation test for YY1 and TEAD4
@@ -624,7 +624,7 @@ permutation test for YY1 and TEAD4
 </div>
 <div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="co">## YY1 vs TAF:</span>
 <span class="no">pt2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/peakPermTest.html">peakPermTest</a></span>(<span class="no">YY1</span>, <span class="no">TAF</span>, <span class="kw">pool</span><span class="kw">=</span><span class="no">pool</span>, <span class="kw">seed</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">force.parallel</span><span class="kw">=</span><span class="fl">FALSE</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/motifStack/man/pcm-class.html">plot</a></span>(<span class="no">pt2</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">pt2</span>)</pre></body></html></div>
 <div class="figure">
 <img src="IntegratedChIPseqAnalysisWorkshop_files/figure-html/peakPermTest2-1.png" alt="permutation test for YY1 and TAF" width="576"><p class="caption">
 permutation test for YY1 and TAF
@@ -687,7 +687,7 @@ Distribution of aligned features
 <h2 class="hasAnchor">
 <a href="#my-section" class="anchor"></a>Example9: creating lollipop plot with trackViewer</h2>
 <p>It is routine to show the distribution of mutation or genetic variations by lollipop-style (or needle-style) plot in a genome browser, along with a variety of genomic annotations, such as gene or exon level models, CpG island, and so on.</p>
-<p>For SNP status or methlyation data, lollipop plot is often used. Many tools can provide lollipop plot such as cBioPortal Tools::MutationMapper<span class="citation">[@gao2013integrative]</span>, EMBL-EBI::Pfam<span class="citation">[@finn2006pfam]</span>, and BioJS::muts-needle-plot<span class="citation">[@michael_p_schroeder_2015_14561]</span>, BiQ Analyzer<span class="citation">[@bock2005biq]</span>, and Methylation plotter<span class="citation">[@mallona2014methylation]</span>. The cBioPortal Tools::MutationMapper is a well-known and easy to use online genome browser that can generate high quality figures with mutations by inputing tab-delimited mutation data. In R/Bioconductor, with the Rgraphics system, there are many flexible ways to display methylation data such as <em>MethVisual</em><span class="citation">[@zackay2010methvisual]</span>, <em>REDseq</em><span class="citation">[@zhu4redseq]</span>, and <em>GenVisR</em><span class="citation">[@skidmore2016genvisr]</span>.</p>
+<p>For SNP status or methlyation data, lollipop plot is often used. Many tools can provide lollipop plot such as cBioPortal Tools::MutationMapper<span class="citation"><sup>1</sup></span>, EMBL-EBI::Pfam<span class="citation"><sup>2</sup></span>, and BioJS::muts-needle-plot<span class="citation"><sup>3</sup></span>, BiQ Analyzer<span class="citation"><sup>4</sup></span>, and Methylation plotter<span class="citation"><sup>5</sup></span>. The cBioPortal Tools::MutationMapper is a well-known and easy to use online genome browser that can generate high quality figures with mutations by inputing tab-delimited mutation data. In R/Bioconductor, with the Rgraphics system, there are many flexible ways to display methylation data such as <em>MethVisual</em><span class="citation"><sup>6</sup></span>, <em>REDseq</em><span class="citation"><sup>7</sup></span>, and <em>GenVisR</em><span class="citation"><sup>8</sup></span>.</p>
 <p>Below is a summary of current tools that are available.</p>
 <table class="table">
 <colgroup>
@@ -704,35 +704,35 @@ Distribution of aligned features
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">MutationMapper<span class="citation">[@gao2013integrative]</span>
+<td align="left">MutationMapper<span class="citation"><sup>1</sup></span>
 </td>
 <td align="left">tab-delimited text</td>
 <td align="left">Yes</td>
 <td align="left">interprets mutations with different heights along protein annotations in automatic color theme</td>
 </tr>
 <tr class="even">
-<td align="left">Pfam<span class="citation">[@finn2006pfam]</span>
+<td align="left">Pfam<span class="citation"><sup>2</sup></span>
 </td>
 <td align="left">JSON</td>
 <td align="left">Yes</td>
 <td align="left">could combine different line and head colors with different drawing styles</td>
 </tr>
 <tr class="odd">
-<td align="left">muts-needle-plot<span class="citation">[@michael_p_schroeder_2015_14561]</span>
+<td align="left">muts-needle-plot<span class="citation"><sup>3</sup></span>
 </td>
 <td align="left">JSON</td>
 <td align="left">No</td>
 <td align="left">plots data point with different colors, heights, and size along annotations, and highlighted selcted coordinates</td>
 </tr>
 <tr class="even">
-<td align="left">BiQ Analyzer<span class="citation">[@bock2005biq]</span>
+<td align="left">BiQ Analyzer<span class="citation"><sup>4</sup></span>
 </td>
 <td align="left">BiQ methylation file</td>
 <td align="left">Yes</td>
 <td align="left">interprets methylation status in black &amp; white</td>
 </tr>
 <tr class="odd">
-<td align="left">Methylation plotter<span class="citation">[@mallona2014methylation]</span>
+<td align="left">Methylation plotter<span class="citation"><sup>5</sup></span>
 </td>
 <td align="left">tab-delimited text</td>
 <td align="left">Yes</td>
@@ -740,7 +740,7 @@ Distribution of aligned features
 </tr>
 <tr class="even">
 <td align="left">
-<em>MethVisual</em><span class="citation">[@zackay2010methvisual]</span>
+<em>MethVisual</em><span class="citation"><sup>6</sup></span>
 </td>
 <td align="left">R list</td>
 <td align="left">No</td>
@@ -748,7 +748,7 @@ Distribution of aligned features
 </tr>
 <tr class="odd">
 <td align="left">
-<em>REDseq</em><span class="citation">[@zhu4redseq]</span>
+<em>REDseq</em><span class="citation"><sup>7</sup></span>
 </td>
 <td align="left">R list</td>
 <td align="left">No</td>
@@ -756,7 +756,7 @@ Distribution of aligned features
 </tr>
 <tr class="even">
 <td align="left">
-<em>GenVisR</em><span class="citation">[@skidmore2016genvisr]</span>
+<em>GenVisR</em><span class="citation"><sup>8</sup></span>
 </td>
 <td align="left">R dataframe</td>
 <td align="left">No</td>
@@ -1007,6 +1007,32 @@ lollipop plot, caterpillar layout
 dandelion plot
 </p>
 </div>
+<div id="refs" class="references">
+<div id="ref-gao2013integrative">
+<p>1. Gao, J. <em>et al.</em> Integrative analysis of complex cancer genomics and clinical profiles using the cBioPortal. <em>Science signaling</em> <strong>6,</strong> pl1 (2013).</p>
+</div>
+<div id="ref-finn2006pfam">
+<p>2. Finn, R. D. <em>et al.</em> Pfam: Clans, web tools and services. <em>Nucleic acids research</em> <strong>34,</strong> D247–D251 (2006).</p>
+</div>
+<div id="ref-michael_p_schroeder_2015_14561">
+<p>3. Schroeder, M. P. Muts-needle-plot: Mutations needle plot v0.8.0. (2015). doi:<a href="https://doi.org/10.5281/zenodo.14561">10.5281/zenodo.14561</a></p>
+</div>
+<div id="ref-bock2005biq">
+<p>4. Bock, C. <em>et al.</em> BiQ analyzer: Visualization and quality control for dna methylation data from bisulfite sequencing. <em>Bioinformatics</em> <strong>21,</strong> 4067–4068 (2005).</p>
+</div>
+<div id="ref-mallona2014methylation">
+<p>5. Mallona, I., Díez-Villanueva, A. &amp; Peinado, M. A. Methylation plotter: A web tool for dynamic visualization of dna methylation data. <em>Source code for biology and medicine</em> <strong>9,</strong> 1 (2014).</p>
+</div>
+<div id="ref-zackay2010methvisual">
+<p>6. Zackay, A. &amp; Steinhoff, C. MethVisual-visualization and exploratory statistical analysis of dna methylation profiles from bisulfite sequencing. <em>BMC research notes</em> <strong>3,</strong> 337 (2010).</p>
+</div>
+<div id="ref-zhu4redseq">
+<p>7. Zhu, L. &amp; others. REDseq: A bioconductor package for analyzing high throughput sequencing data from restriction enzyme digestion.</p>
+</div>
+<div id="ref-skidmore2016genvisr">
+<p>8. Skidmore, Z. L. <em>et al.</em> GenVisR: Genomic visualizations in r. <em>Bioinformatics</em> btw325 (2016).</p>
+</div>
+</div>
 </div>
   </div>
 
@@ -1021,7 +1047,7 @@ dandelion plot
 
 
       <footer><div class="copyright">
-  <p>Developed by Kai Hu, Jianhong Ou, Haibo Liu, Lihua Julie Zhu.</p>
+  <p>Developed by Kai Hu, Jianhong Ou.</p>
 </div>
 
 <div class="pkgdown">
